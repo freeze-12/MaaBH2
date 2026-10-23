@@ -1,0 +1,563 @@
+{
+    "interface_version": 2,
+    "name": "崩崩自动化",
+    "description": "崩崩自动化：崩坏学园2（UC 渠道服 / com.miHoYo.HSoDv22144.uc）",
+    "version": "0.2.0",
+    "license": "MIT",
+    "controller": [
+        {
+            "name": "雷电模拟器",
+            "type": "Adb",
+            "display_short_side": 720
+        }
+    ],
+    "resource": [
+        {
+            "name": "默认",
+            "path": [
+                "./resource"
+            ]
+        }
+    ],
+    "task": [
+        {
+            "name": "0. 测试连接（不操作）",
+            "entry": "SmokeTest"
+        },
+        {
+            "name": "1. 启动游戏",
+            "entry": "StartGame",
+            "option": [
+                "启动渠道"
+            ]
+        },
+        {
+            "name": "2. 进入游戏（自选服务器）",
+            "entry": "进入游戏_开始",
+            "option": [
+                "选择服务器"
+            ]
+        },
+        {
+            "name": "3. 清理弹窗",
+            "entry": "清理弹窗_入口"
+        },
+        {
+            "name": "4. 社团领取",
+            "entry": "社团_开始"
+        },
+        {
+            "name": "5. 日常活动清体力",
+            "entry": "日常_开始",
+            "description": "默认以刷亲密套装去打：主套是刷亲密的杂牌军，备用是割草刷装备的套装。需要把游戏内切换头像移到右上角，进地图后涉及角色切换，如菲米莉丝这种会弹窗导致识别失败的角色，记得关掉弹窗。",
+            "option": [
+                "战斗次数",
+                "战斗界面方位选择",
+                "使用双倍体力"
+            ]
+        },
+        {
+            "name": "9. 测试点击桌面图标",
+            "entry": "OpenAppsFolder"
+        },
+        {
+            "name": "6. 共鸣屋每日刷新",
+            "entry": "共鸣屋_开始"
+        },
+        {
+            "name": "7. 多元裂缝",
+            "entry": "多元_开始",
+            "description": "默认以刷亲密套装去打：主套是刷亲密的杂牌军，备用是割草刷装备的套装。需要把游戏内切换头像移到右上角，进地图后涉及角色切换，如菲米莉丝这种会弹窗导致识别失败的角色，记得关掉弹窗。",
+            "option": [
+                "使魔的爱",
+                "虚轴之庭",
+                "螺旋回廊",
+                "螺旋回廊敌人",
+                "关卡等待时间"
+            ]
+        },
+        {
+            "name": "8. 购买零时之种",
+            "entry": "购买_零时开始"
+        },
+        {
+            "name": "9. 使魔探险",
+            "entry": "探险_开始"
+        },
+        {
+            "name": "10. 每日每周任务奖励领取",
+            "entry": "每日_开始"
+        }
+    ],
+    "option": {
+        "选择服务器": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "S2. 冰雪女王",
+                    "pipeline_override": {
+                        "进入游戏_选择服务器": {
+                            "expected": "冰雪女王",
+                            "target": [
+                                957,
+                                289
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "S1. 纯白女神",
+                    "pipeline_override": {
+                        "进入游戏_选择服务器": {
+                            "expected": "纯白女神",
+                            "target": [
+                                957,
+                                451
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "上次登录",
+                    "pipeline_override": {
+                        "进入游戏_选择服务器": {
+                            "expected": "上次登录",
+                            "target": [
+                                957,
+                                289
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "战斗次数": {
+            "type": "input",
+            "label": "战斗次数",
+            "inputs": [
+                {
+                    "name": "次数",
+                    "label": "循环次数",
+                    "description": "总共打几场，填 1~99 的整数。填 N 就总共打 N 场（从第一次识别点击 bonus 开始计数）。体力不足时会自动兑换双倍体力继续，直到打满 N 场或无法补体力为止",
+                    "default": "8",
+                    "pipeline_type": "int",
+                    "verify": "^\\d+$"
+                }
+            ],
+  "pipeline_override": {
+    "日常_有bonus": {
+      "max_hit": "{次数}"
+    }
+  }
+        },
+        "启动渠道": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "默认（优先 UC）",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv22144.uc"
+                        }
+                    }
+                },
+                {
+                    "name": "UC 渠道",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv22144.uc"
+                        }
+                    }
+                },
+                {
+                    "name": "混服",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv2.mix"
+                        }
+                    }
+                }
+            ]
+        },
+        "使魔的爱": {
+            "type": "switch",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "使魔的爱_入口": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "使魔的爱_入口": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "虚轴之庭": {
+            "type": "switch",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "虚轴之庭_入口": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "虚轴之庭_入口": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "螺旋回廊": {
+            "type": "switch",
+            "label": "螺旋回廊",
+            "description": "螺旋回廊现在问题很多暂时放弃",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "螺旋回廊_入口": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "螺旋回廊_入口": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "螺旋回廊敌人": {
+            "type": "select",
+            "default_case": "白狐幽魂",
+            "cases": [
+                {
+                    "name": "白狐幽魂",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "baihuyouhun.png"
+                            ],
+                            "target_offset": [
+                                40,
+                                52,
+                                -80,
+                                -104
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "机甲少女",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "jijiashaonv.png"
+                            ],
+                            "target_offset": [
+                                46,
+                                64,
+                                -92,
+                                -128
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "杏",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "xing.png"
+                            ],
+                            "target_offset": [
+                                38,
+                                56,
+                                -76,
+                                -112
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "琪亚娜",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "qiyana.png"
+                            ],
+                            "target_offset": [
+                                32,
+                                54,
+                                -64,
+                                -108
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "融合之子",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "ronghezhizi.png"
+                            ],
+                            "target_offset": [
+                                38,
+                                60,
+                                -76,
+                                -120
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "兵神",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "bingshen.png"
+                            ],
+                            "target_offset": [
+                                34,
+                                56,
+                                -68,
+                                -112
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "德丽莎",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "delisha.png"
+                            ],
+                            "target_offset": [
+                                34,
+                                54,
+                                -68,
+                                -108
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "幼年芽衣",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "younianyayi.png"
+                            ],
+                            "target_offset": [
+                                36,
+                                58,
+                                -72,
+                                -116
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "无量塔姬子",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "wuliangtajizi.png"
+                            ],
+                            "target_offset": [
+                                48,
+                                57,
+                                -96,
+                                -114
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "雷电芽衣",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "leidianyayi.png"
+                            ],
+                            "target_offset": [
+                                36,
+                                58,
+                                -72,
+                                -116
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "凯文",
+                    "pipeline_override": {
+                        "螺旋_点敌人": {
+                            "template": [
+                                "kaiwen.png"
+                            ],
+                            "target_offset": [
+                                38,
+                                55,
+                                -76,
+                                -110
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "关卡等待时间": {
+            "type": "input",
+            "label": "关卡等待时间（毫秒）",
+            "inputs": [
+                {
+                    "name": "毫秒",
+                    "label": "关卡最多等待毫秒数",
+                    "description": "默认 90000 = 90 秒。想要 2 分钟就填 120000",
+                    "default": "90000",
+                    "pipeline_type": "int",
+                    "verify": "^\\d+$"
+                }
+            ],
+            "pipeline_override": {
+                "螺旋_等圈": {
+                    "timeout": "{毫秒}"
+                }
+            }
+        },
+        "使用双倍体力": {
+            "type": "switch",
+            "label": "使用双倍体力",
+            "description": "开启后，找不到「选择助战好友」（体力不足）时自动尝试兑换双倍体力（补充体力→有兑换则点兑换继续，无兑换则取消退出）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "日常_有bonus": {
+                            "on_error": [
+                                "日常_补体力_点补充体力"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "日常_有bonus": {
+                            "on_error": [
+                                "日常_点战斗回判断"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "战斗界面方位选择": {
+            "type": "select",
+            "label": "战斗界面方位选择",
+            "description": "优先从哪个方位寻找 bonus。选中方位排第一，其余按「左上→左下→右上」原序轮转",
+            "default_case": "左上",
+            "cases": [
+                {
+                    "name": "左上",
+                    "pipeline_override": {
+                        "备用_点活动": {
+                            "next": [
+                                "备用_进活动1"
+                            ]
+                        },
+                        "备用_返回1": {
+                            "next": [
+                                "备用_进活动2"
+                            ]
+                        },
+                        "备用_返回2": {
+                            "next": [
+                                "备用_下滑到顶"
+                            ]
+                        },
+                        "备用_返回3": {
+                            "next": [
+                                "结束"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "左下",
+                    "pipeline_override": {
+                        "备用_点活动": {
+                            "next": [
+                                "备用_进活动2"
+                            ]
+                        },
+                        "备用_返回1": {
+                            "next": [
+                                "备用_下滑到顶"
+                            ]
+                        },
+                        "备用_返回2": {
+                            "next": [
+                                "备用_进活动1"
+                            ]
+                        },
+                        "备用_返回3": {
+                            "next": [
+                                "结束"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右上",
+                    "pipeline_override": {
+                        "备用_点活动": {
+                            "next": [
+                                "备用_下滑到顶"
+                            ]
+                        },
+                        "备用_返回1": {
+                            "next": [
+                                "备用_进活动2"
+                            ]
+                        },
+                        "备用_返回2": {
+                            "next": [
+                                "结束"
+                            ]
+                        },
+                        "备用_返回3": {
+                            "next": [
+                                "备用_进活动1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

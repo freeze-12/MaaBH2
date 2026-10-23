@@ -1,0 +1,25 @@
+# 本机运行产生的配置与日志，不要提交到仓库
+config/
+logs/
+debug/
+temp/
+backup/
+*.bak
+*.log
+
+# MFA 客户端框架文件（官方软件，不需要上传）
+MFAAvalonia.exe
+MFAAvalonia.dll
+MFAAvalonia.deps.json
+MFAAvalonia.runtimeconfig.json
+libs/
+runtimes/
+plugins/
+DependencySetup_*.bat
+
+# OCR 模型（MFA 官方自带）
+resource/model/
+
+# 系统文件
+.DS_Store
+Thumbs.db

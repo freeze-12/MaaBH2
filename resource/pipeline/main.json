@@ -1,0 +1,5137 @@
+{
+    "$__mpe_config_新建Pipeline1": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "savedViewport": {
+                "x": 322,
+                "y": -263,
+                "zoom": 2.5
+            },
+            "filename": "新建Pipeline1",
+            "version": "v2.1.0"
+        }
+    },
+    "关掉x": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "popup_x"
+                ],
+                "threshold": 0.8,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    15,
+                    15,
+                    -30,
+                    -30
+                ]
+            }
+        },
+        "next": [
+            "清弹窗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 621,
+                "y": 617
+            }
+        }
+    },
+    "领取": {
+        "max_hit": 5,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "btn_lingqu.png"
+                ],
+                "threshold": 0.8,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    56,
+                    16,
+                    -112,
+                    -32
+                ]
+            }
+        },
+        "next": [
+            "清弹窗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 267,
+                "y": 1167
+            }
+        }
+    },
+    "清弹窗_点领取奖励": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^点击领取奖励$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "next": [
+            "清弹窗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 267,
+                "y": 1400
+            }
+        }
+    },
+    "进入主界面": {
+        "next": [
+            "检测主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1194,
+                "y": 981
+            }
+        }
+    },
+    "SmokeTest": {
+        "pre_delay": 200,
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "StartGame": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv22144.uc"
+            }
+        },
+        "post_delay": 8000,
+        "on_error": [
+            "启动_备用"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 240,
+                "y": 0
+            }
+        }
+    },
+    "进入游戏_开始": {
+        "timeout": 20000,
+        "next": [
+            "进入游戏_检测更新",
+            "进入游戏_选择服务器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 393
+            }
+        }
+    },
+    "进入游戏_检测更新": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^快给我下$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 2000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "游戏有更新正在更新"
+        },
+        "next": [
+            "进入游戏_等更新完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 160,
+                "y": 393
+            }
+        }
+    },
+    "进入游戏_等更新完成": {
+        "timeout": -1,
+        "next": [
+            "进入游戏_选择服务器"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 470
+            }
+        }
+    },
+    "进入游戏_选择服务器": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": "冰雪女王"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 15000,
+        "timeout": 5000,
+        "next": [
+            "进入游戏_双击屏"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 344
+            }
+        }
+    },
+    "进入游戏_双击屏": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    640,
+                    360
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 300,
+        "post_delay": 5000,
+        "timeout": 5000,
+        "next": [
+            "进入游戏_处理登录框"
+        ],
+        "on_error": [
+            "进入游戏_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": 316
+            }
+        }
+    },
+    "进入游戏_处理登录框": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": "login_ok.png"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    639,
+                    455
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "timeout": 5000,
+        "next": [
+            "进入游戏_再双击"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 569
+            }
+        }
+    },
+    "进入游戏_再双击": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    640,
+                    360
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 300,
+        "post_delay": 2000,
+        "next": [
+            "清弹窗",
+            "进入主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1280,
+                "y": 587
+            }
+        }
+    },
+    "进入游戏_完成": {
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 379
+            }
+        }
+    },
+    "OpenAppsFolder": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    80,
+                    100,
+                    300,
+                    180
+                ],
+                "template": "sys_apps.png",
+                "threshold": 0.7
+            }
+        },
+        "pre_delay": 300,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    20,
+                    20,
+                    -40,
+                    -40
+                ]
+            }
+        },
+        "post_delay": 1200,
+        "$__mpe_code": {
+            "position": {
+                "x": 480,
+                "y": 0
+            }
+        }
+    },
+    "清理弹窗_入口": {
+        "next": [
+            "清弹窗",
+            "进入主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -30,
+                "y": 700
+            }
+        }
+    },
+    "清弹窗": {
+        "timeout": 10000,
+        "next": [
+            "关掉x",
+            "领取",
+            "清弹窗_点领取奖励"
+        ],
+        "on_error": [
+            "首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 465,
+                "y": 906
+            }
+        }
+    },
+    "首页": {
+        "max_hit": 5,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "进入主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 798,
+                "y": 995
+            }
+        }
+    },
+    "社团_开始": {
+        "next": [
+            "社团_点社交"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -30,
+                "y": 1200
+            }
+        }
+    },
+    "社团_点社交": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1040,
+                    0,
+                    150,
+                    125
+                ],
+                "expected": [
+                    "^社交$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1087,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "timeout": 15000,
+        "next": [
+            "社团_点社团"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 200,
+                "y": 1200
+            }
+        }
+    },
+    "社团_点社团": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shetuan"
+                ],
+                "threshold": [
+                    0.6
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    90,
+                    35,
+                    -180,
+                    -70
+                ]
+            }
+        },
+        "timeout": 15000,
+        "next": [
+            "社团_可领",
+            "社团_不可领"
+        ],
+        "on_error": [
+            "社团_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 430,
+                "y": 1200
+            }
+        }
+    },
+    "社团_可领": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shetuankeling"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    48,
+                    21,
+                    -96,
+                    -42
+                ]
+            }
+        },
+        "timeout": 10000,
+        "next": [
+            "社团_点领取"
+        ],
+        "on_error": [
+            "社团_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1150
+            }
+        }
+    },
+    "社团_不可领": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shetuanbukeling"
+                ],
+                "threshold": [
+                    0.6
+                ],
+                "order_by": "Score"
+            }
+        },
+        "next": [
+            "社团_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1290
+            }
+        }
+    },
+    "社团_点领取": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shetuanlingqu"
+                ],
+                "threshold": [
+                    0.6
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    64,
+                    22,
+                    -128,
+                    -44
+                ]
+            }
+        },
+        "timeout": 15000,
+        "next": [
+            "社团_点确定"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 888,
+                "y": 1150
+            }
+        }
+    },
+    "社团_点确定": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shetuanqueding"
+                ],
+                "threshold": [
+                    0.6
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    65,
+                    22,
+                    -130,
+                    -44
+                ]
+            }
+        },
+        "timeout": 15000,
+        "next": [
+            "社团_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1120,
+                "y": 1150
+            }
+        }
+    },
+    "社团_回首页": {
+        "max_hit": 5,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "检测主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1350,
+                "y": 1200
+            }
+        }
+    },
+    "日常_开始": {
+        "timeout": 5000,
+        "next": [
+            "日常_点战斗"
+        ],
+        "on_error": [
+            "日常_返回重试"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -316,
+                "y": 1289
+            }
+        }
+    },
+    "日常_返回重试": {
+        "max_hit": 5,
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "huodongfanhui"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^返回$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "日常_开始"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -284,
+                "y": 1677
+            }
+        }
+    },
+    "日常_点战斗": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    705,
+                    0,
+                    160,
+                    125
+                ],
+                "expected": [
+                    "^战斗$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+  "timeout": 5000,
+  "next": [
+    "日常_有bonus"
+  ],
+  "on_error": [
+    "日常_返回重试",
+    "备用_判定入口"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 200,
+      "y": 1450
+    }
+  }
+},
+  "日常_补体力后点战斗": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "roi": [
+          705,
+          0,
+          160,
+          125
+        ],
+        "expected": [
+          "^战斗$"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          755,
+          42,
+          30,
+          30
+        ]
+      }
+    },
+    "timeout": 5000,
+    "next": [
+      "日常_补体力后点bonus"
+    ],
+    "on_error": [
+      "日常_点战斗回判断"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 200,
+        "y": 1720
+      }
+    }
+  },
+    "日常_有bonus": {
+  "recognition": {
+    "type": "And",
+    "param": {
+      "all_of": [
+        {
+          "recognition": "TemplateMatch",
+          "template": [
+            "bonus"
+          ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "green_mask": true,
+                        "roi": [
+                            5,
+                            5,
+                            1270,
+                            710
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "BONUS"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+  "action": {
+    "type": "Click",
+    "param": {
+      "target_offset": [
+        0,
+        21,
+        0,
+        0
+      ]
+    }
+  },
+  "repeat": 4,
+  "repeat_delay": 500,
+  "post_delay": 2000,
+  "timeout": 4000,
+  "next": [
+    "日常_选助战好友"
+  ],
+  "on_error": [
+    "日常_点战斗回判断"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 434,
+      "y": 1460
+    }
+  }
+},
+  "日常_补体力后点bonus": {
+    "recognition": {
+      "type": "And",
+      "param": {
+        "all_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "bonus"
+            ],
+            "threshold": 0.85,
+            "order_by": "Score",
+            "green_mask": true,
+            "roi": [
+              5,
+              5,
+              1270,
+              710
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "BONUS"
+            ],
+            "order_by": "Expected"
+          }
+        ],
+        "box_index": 0
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          0,
+          21,
+          0,
+          0
+        ]
+      }
+    },
+    "repeat": 4,
+    "repeat_delay": 500,
+    "post_delay": 2000,
+    "timeout": 4000,
+    "next": [
+      "日常_选助战好友"
+    ],
+    "on_error": [
+      "日常_点战斗回判断"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 434,
+        "y": 1720
+      }
+    }
+  },
+    "日常_选助战好友": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "选择助战好友"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    10,
+                    -20,
+                    -20
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 4000,
+        "next": [
+            "日常_备用装备"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1450
+            }
+        }
+    },
+    "日常_补体力_点补充体力": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^补充体力$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 4000,
+        "next": [
+            "日常_补体力_点兑换",
+            "日常_补体力_点取消"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1580
+            }
+        }
+    },
+    "日常_补体力_点兑换": {
+  "recognition": {
+    "type": "OCR",
+    "param": {
+      "roi": [
+        400,
+        400,
+        450,
+        120
+      ],
+      "expected": [
+        "^兑换$"
+      ],
+      "order_by": "Expected"
+    }
+  },
+  "action": {
+    "type": "Click"
+  },
+  "post_delay": 1500,
+  "timeout": 4000,
+  "focus": {
+    "Node.PipelineNode.Succeeded": "✅ 有双倍体力：已点击兑换"
+  },
+  "next": [
+    "日常_补体力_点取消水晶框",
+    "日常_补体力后点战斗"
+  ],
+  "on_error": [
+    "日常_点战斗回判断"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 660,
+      "y": 1720
+    }
+  }
+},
+    "日常_补体力_点取消": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^取消$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 4000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "❌ 没有双倍体力：已点击取消"
+        },
+        "next": [
+            "日常_点战斗回判断"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1860
+            }
+        }
+    },
+    "日常_补体力_点取消水晶框": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^取消$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 4000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "⚠️ 双倍体力不足：已关闭水晶补体力框"
+        },
+  "next": [
+    "日常_点战斗回判断"
+  ],
+  "on_error": [
+    "日常_点战斗回判断"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 660,
+      "y": 2140
+    }
+  }
+},
+    "日常_备用装备": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "备用装备"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    10,
+                    -20,
+                    -20
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 4000,
+        "next": [
+            "日常_开战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 890,
+                "y": 1450
+            }
+        }
+    },
+    "日常_开战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "开战"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    10,
+                    -20,
+                    -20
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "日常_点切换"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1120,
+                "y": 1450
+            }
+        }
+    },
+    "日常_点切换": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "qiehuan_mask.png"
+                ],
+                "green_mask": true,
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    32,
+                    32,
+                    -64,
+                    -64
+                ]
+            }
+        },
+  "post_delay": 2000,
+  "timeout": 30000,
+  "next": [
+    "日常_点确定"
+  ],
+  "on_error": [
+    "日常_点战斗回判断"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 1350,
+      "y": 1450
+    }
+  }
+},
+    "日常_点确定": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "确定"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    10,
+                    -20,
+                    -20
+                ]
+            }
+        },
+  "timeout": 20000,
+  "focus": {
+    "Node.PipelineNode.Succeeded": "✅ 完成一次战斗"
+  },
+  "next": [
+    "日常_有bonus"
+  ],
+  "on_error": [
+    "日常_点战斗回判断"
+  ],
+  "$__mpe_code": {
+    "position": {
+      "x": 1580,
+      "y": 1450
+    }
+  }
+},
+    "日常_回首页": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1580
+            }
+        }
+    },
+    "日常_判断战斗主界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhuxianhuodongtiaozhan"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "focus": {
+            "Node.PipelineNode.Succeeded": "检测到战斗主界面"
+        },
+        "next": [
+            "日常_回首页"
+        ],
+        "on_error": [
+            "日常_点活动返回"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1520
+            }
+        }
+    },
+    "日常_点战斗回判断": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 30000,
+        "next": [
+            "日常_判断战斗主界面",
+            "日常_点活动返回",
+            "日常_回首页"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 660,
+                "y": 1380
+            }
+        }
+    },
+    "日常_点活动返回": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 30000,
+        "next": [
+            "日常_判断战斗主界面",
+            "日常_点活动返回",
+            "日常_回首页"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 890,
+                "y": 1520
+            }
+        }
+    },
+    "结束": {
+        "$__mpe_code": {
+            "position": {
+                "x": 430,
+                "y": 1600
+            }
+        }
+    },
+    "备用_判定入口": {
+        "timeout": 4000,
+        "next": [
+            "备用_找挑战入口"
+        ],
+        "on_error": [
+            "备用_点活动返回",
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_找挑战入口": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhuxianhuodongtiaozhan"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "next": [
+            "备用_点活动"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_点活动返回": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "备用_判定入口"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_点活动": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    5,
+                    5,
+                    1270,
+                    710
+                ],
+                "template": [
+                    "huodong"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    38,
+                    22,
+                    -76,
+                    -44
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 8000,
+        "next": [
+            "备用_进活动1"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_进活动1": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    368,
+                    242,
+                    100,
+                    100
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "备用_循环1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_循环1": {
+        "timeout": 4000,
+        "next": [
+            "日常_有bonus"
+        ],
+        "on_error": [
+            "备用_翻页1",
+            "备用_返回1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_活动1_bonus": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "bonus"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "green_mask": true,
+                        "roi": [
+                            5,
+                            5,
+                            1270,
+                            710
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "BONUS"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    0,
+                    21,
+                    0,
+                    0
+                ]
+            }
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "next": [
+            "日常_选助战好友"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_翻页1": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    625,
+                    585,
+                    210,
+                    130
+                ],
+                "template": [
+                    "guanka-fanye"
+                ],
+                "threshold": 0.68,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "备用_循环1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_返回1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "备用_进活动2"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_进活动2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    389,
+                    514,
+                    100,
+                    100
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "备用_循环2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_循环2": {
+        "timeout": 4000,
+        "next": [
+            "日常_有bonus"
+        ],
+        "on_error": [
+            "备用_翻页2",
+            "备用_返回2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_活动2_bonus": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "bonus"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "green_mask": true,
+                        "roi": [
+                            5,
+                            5,
+                            1270,
+                            710
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "BONUS"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    0,
+                    21,
+                    0,
+                    0
+                ]
+            }
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "next": [
+            "日常_选助战好友"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_翻页2": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    625,
+                    585,
+                    210,
+                    130
+                ],
+                "template": [
+                    "guanka-fanye"
+                ],
+                "threshold": 0.68,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "备用_循环2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_返回2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "备用_下滑到顶"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_下滑到顶": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    1005,
+                    200
+                ],
+                "end": [
+                    [
+                        1005,
+                        600
+                    ]
+                ],
+                "duration": 600
+            }
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 1000,
+        "next": [
+            "备用_进活动3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_进活动3": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    944,
+                    214,
+                    100,
+                    100
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "备用_循环3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_循环3": {
+        "timeout": 4000,
+        "next": [
+            "日常_有bonus"
+        ],
+        "on_error": [
+            "备用_翻页3",
+            "备用_返回3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_活动3_bonus": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "bonus"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "green_mask": true,
+                        "roi": [
+                            5,
+                            5,
+                            1270,
+                            710
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "BONUS"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    0,
+                    21,
+                    0,
+                    0
+                ]
+            }
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "next": [
+            "日常_选助战好友"
+        ],
+        "on_error": [
+            "日常_点战斗回判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_翻页3": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    625,
+                    585,
+                    210,
+                    130
+                ],
+                "template": [
+                    "guanka-fanye"
+                ],
+                "threshold": 0.68,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "备用_循环3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "备用_返回3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "结束"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "检测主界面": {
+        "pre_delay": 2000,
+        "timeout": 10000,
+        "focus": {
+            "Node.Recognition.Succeeded": "🔍 检测主界面中…"
+        },
+        "next": [
+            "检测主界面_标志"
+        ],
+        "on_error": [
+            "拉回主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "检测主界面_标志": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhujiemian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score",
+                "green_mask": true
+            }
+        },
+        "focus": {
+            "Node.PipelineNode.Succeeded": "✅ 检测主界面通过：已确认停留在主界面，任务正常结束"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": -324,
+                "y": -51
+            }
+        }
+    },
+    "拉回主界面": {
+        "max_hit": 2,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    627,
+                    40,
+                    60,
+                    30
+                ]
+            }
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 1000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "⚠️ 首次未检测到主界面，已连点 4 下首页，正在重新检测"
+        },
+        "next": [
+            "检测主界面_终"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -389,
+                "y": -92
+            }
+        }
+    },
+    "共鸣屋_开始": {
+        "next": [
+            "共鸣屋_点商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "共鸣屋_点商店": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    930,
+                    0,
+                    150,
+                    125
+                ],
+                "expected": [
+                    "^商店$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    985,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "timeout": 8000,
+        "next": [
+            "共鸣屋_点崩坏屋"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -449,
+                "y": -73
+            }
+        }
+    },
+    "共鸣屋_点崩坏屋": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "benghuaiwu.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score",
+                "target_offset": [
+                    44,
+                    33,
+                    -88,
+                    -66
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "timeout": 10000,
+        "next": [
+            "共鸣屋_点共鸣屋"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -365,
+                "y": -75
+            }
+        }
+    },
+    "共鸣屋_点共鸣屋": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    15,
+                    270,
+                    135,
+                    80
+                ],
+                "expected": [
+                    "^共鸣屋$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    62,
+                    295,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "timeout": 10000,
+        "next": [
+            "共鸣屋_判断剩余次数"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -502,
+                "y": -127
+            }
+        }
+    },
+    "共鸣屋_判断剩余次数": {
+        "timeout": 4000,
+        "next": [
+            "共鸣屋_有剩余次数"
+        ],
+        "on_error": [
+            "共鸣屋_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "共鸣屋_有剩余次数": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shengyucishu.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "next": [
+            "共鸣屋_点刷新"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -565,
+                "y": -32
+            }
+        }
+    },
+    "共鸣屋_点刷新": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "benghuaiwushuaxin.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score",
+                "target_offset": [
+                    13,
+                    12,
+                    -26,
+                    -24
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "timeout": 8000,
+        "next": [
+            "共鸣屋_确认刷新"
+        ],
+        "on_error": [
+            "共鸣屋_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -324,
+                "y": -14
+            }
+        }
+    },
+    "共鸣屋_回首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "检测主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -486,
+                "y": -32
+            }
+        }
+    },
+    "共鸣屋_确认刷新": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "mianfeishuaxinqueren.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^确定$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 4000,
+        "next": [
+            "共鸣屋_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -514,
+                "y": -62
+            }
+        }
+    },
+    "启动_备用": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv2.mix"
+            }
+        },
+        "post_delay": 8000,
+        "$__mpe_code": {
+            "position": {
+                "x": -234,
+                "y": -77
+            }
+        }
+    },
+    "多元_开始": {
+        "next": [
+            "多元_尝试"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "多元_尝试": {
+        "timeout": 5000,
+        "next": [
+            "多元_点战斗"
+        ],
+        "on_error": [
+            "多元_点返回"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -543,
+                "y": 5
+            }
+        }
+    },
+    "多元_点战斗": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "zhandou"
+                        ],
+                        "threshold": 0.8,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^战斗$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": [
+                            705,
+                            0,
+                            160,
+                            125
+                        ]
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "timeout": 8000,
+        "next": [
+            "多元_确认战斗页"
+        ],
+        "on_error": [
+            "多元_盲退"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -632,
+                "y": 61
+            }
+        }
+    },
+    "多元_点返回": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "多元_尝试"
+        ],
+        "on_error": [
+            "多元_盲退"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -514,
+                "y": 46
+            }
+        }
+    },
+    "多元_点活动": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "huodong"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "roi": [
+                            10,
+                            220,
+                            170,
+                            110
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^活动$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": [
+                            10,
+                            220,
+                            170,
+                            110
+                        ]
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    60,
+                    255,
+                    45,
+                    25
+                ]
+            }
+        },
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "多元_找裂缝循环"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -166,
+                "y": 85
+            }
+        }
+    },
+    "多元_找裂缝循环": {
+        "timeout": 4000,
+        "next": [
+            "多元_裂缝"
+        ],
+        "on_error": [
+            "多元_滑动",
+            "多元_滑动下",
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -503,
+                "y": 238
+            }
+        }
+    },
+    "多元_裂缝": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    750,
+                    150,
+                    527,
+                    558
+                ],
+                "template": [
+                    "duoyuanliefeng.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score",
+                "target_offset": [
+                    47,
+                    20,
+                    -94,
+                    -40
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "多元_再检测"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -491,
+                "y": 103
+            }
+        }
+    },
+    "多元_滑动": {
+        "max_hit": 6,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    1005,
+                    450
+                ],
+                "end": [
+                    [
+                        1005,
+                        210
+                    ]
+                ],
+                "duration": 600
+            }
+        },
+        "post_delay": 1200,
+        "next": [
+            "多元_找裂缝循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -564,
+                "y": 112
+            }
+        }
+    },
+    "多元_滑动下": {
+        "max_hit": 6,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    1005,
+                    210
+                ],
+                "end": [
+                    [
+                        1005,
+                        450
+                    ]
+                ],
+                "duration": 600
+            }
+        },
+        "post_delay": 1200,
+        "next": [
+            "多元_找裂缝循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -533,
+                "y": -162
+            }
+        }
+    },
+    "使魔的爱_入口": {
+        "timeout": 8000,
+        "next": [
+            "使魔的爱_点入口"
+        ],
+        "on_error": [
+            "虚轴之庭_入口",
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 217,
+                "y": 22
+            }
+        }
+    },
+    "虚轴之庭_入口": {
+        "timeout": 8000,
+        "next": [
+            "虚轴_点入口"
+        ],
+        "on_error": [
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 645,
+                "y": 194
+            }
+        }
+    },
+    "螺旋回廊_入口": {
+        "timeout": 8000,
+        "next": [
+            "螺旋_点入口"
+        ],
+        "on_error": [
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 452,
+                "y": -138
+            }
+        }
+    },
+    "使魔的爱_点入口": {
+        "max_hit": 4,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shimodeai.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.85
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    26,
+                    61,
+                    -55,
+                    -83
+                ]
+            }
+        },
+        "post_delay": 500,
+        "timeout": 10000,
+        "next": [
+            "使魔的爱_判断"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 382,
+                "y": 310
+            }
+        }
+    },
+    "使魔的爱_判断": {
+        "timeout": 5000,
+        "next": [
+            "使魔的爱_有快捷"
+        ],
+        "on_error": [
+            "使魔的爱_回战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 475,
+                "y": 130
+            }
+        }
+    },
+    "使魔的爱_有快捷": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "kuaijiezhandou.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^快捷战斗$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "使魔的爱_确认框"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -488,
+                "y": 53
+            }
+        }
+    },
+    "使魔的爱_确认框": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "kuaijiezhandouqueding.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^确定$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 8000,
+        "next": [
+            "使魔的爱_点确定"
+        ],
+        "on_error": [
+            "使魔的爱_点确定"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -380,
+                "y": 41
+            }
+        }
+    },
+    "使魔的爱_点确定": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "queding.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score",
+                "target_offset": [
+                    30,
+                    9,
+                    -60,
+                    -18
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "使魔的爱_回战斗"
+        ],
+        "on_error": [
+            "使魔的爱_回战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -372,
+                "y": 54
+            }
+        }
+    },
+    "使魔的爱_回战斗": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhandou"
+                ],
+                "threshold": 0.8,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "repeat": 3,
+        "repeat_delay": 500,
+        "post_delay": 2500,
+        "timeout": 8000,
+        "next": [
+            "虚轴之庭_入口",
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "on_error": [
+            "虚轴之庭_入口",
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -335,
+                "y": 57
+            }
+        }
+    },
+    "多元_检测界面": {
+        "timeout": 4000,
+        "next": [
+            "多元_在裂缝"
+        ],
+        "on_error": [
+            "多元_回退",
+            "多元_点活动",
+            "多元_按返回键"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -381,
+                "y": 72
+            }
+        }
+    },
+    "多元_在裂缝": {
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shimodeai.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "xvzhouzhiting.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "luoxuanhuilang.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    }
+                ]
+            }
+        },
+        "next": [
+            "使魔的爱_入口",
+            "虚轴之庭_入口",
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -491,
+                "y": 85
+            }
+        }
+    },
+    "多元_再检测": {
+        "timeout": 5000,
+        "next": [
+            "多元_在裂缝"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -369,
+                "y": 58
+            }
+        }
+    },
+    "多元_回退": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "多元_点活动"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -467,
+                "y": 110
+            }
+        }
+    },
+    "多元_回首页": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -416,
+                "y": 109
+            }
+        }
+    },
+    "检测主界面_终": {
+        "pre_delay": 2000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 检测主界面失败：连点首页后仍未回到主界面"
+        },
+        "next": [
+            "检测主界面_标志"
+        ],
+        "on_error": [
+            "拉回主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -336,
+                "y": 21
+            }
+        }
+    },
+    "虚轴_点入口": {
+        "max_hit": 5,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^与全服玩家一起挑战世界[bB][oO][sS][sS]吧$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "timeout": 10000,
+        "focus": "进入虚轴之庭",
+        "next": [
+            "虚轴_点出击"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -349,
+                "y": 42
+            }
+        }
+    },
+    "虚轴_点出击": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "chuji.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^出$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "虚轴_循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -362,
+                "y": 56
+            }
+        }
+    },
+    "虚轴_循环": {
+        "timeout": 5000,
+        "next": [
+            "虚轴_点快捷战斗"
+        ],
+        "on_error": [
+            "虚轴_回战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -302,
+                "y": 43
+            }
+        }
+    },
+    "虚轴_点快捷战斗": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "kuaijiezhandou.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^快捷战斗$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "虚轴_点Max"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -506,
+                "y": 72
+            }
+        }
+    },
+    "虚轴_点Max": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "kuaijiezhandouxuanze.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^Max$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "timeout": 10000,
+        "next": [
+            "虚轴_点确定"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -289,
+                "y": 68
+            }
+        }
+    },
+    "虚轴_点确定": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "kuaijiezhandouxuanze.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^确定$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "虚轴_点queding"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -537,
+                "y": 174
+            }
+        }
+    },
+    "虚轴_点queding": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "queding.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^确定$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "虚轴_循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -498,
+                "y": 172
+            }
+        }
+    },
+    "虚轴_回战斗": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhandou"
+                ],
+                "threshold": 0.8,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 2500,
+        "timeout": 8000,
+        "next": [
+            "虚轴_点返回"
+        ],
+        "on_error": [
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -448,
+                "y": 160
+            }
+        }
+    },
+    "虚轴_点返回": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "虚轴_检测裂缝"
+        ],
+        "on_error": [
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -341,
+                "y": -142
+            }
+        }
+    },
+    "虚轴_检测裂缝": {
+        "timeout": 5000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 虚轴之庭结束后不在多元裂缝界面"
+        },
+        "next": [
+            "虚轴_在裂缝"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -401,
+                "y": 63
+            }
+        }
+    },
+    "虚轴_在裂缝": {
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shimodeai.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "xvzhouzhiting.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "luoxuanhuilang.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    }
+                ]
+            }
+        },
+        "next": [
+            "螺旋回廊_入口",
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -610,
+                "y": 104
+            }
+        }
+    },
+    "多元_按返回键": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "多元_点活动"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -499,
+                "y": -25
+            }
+        }
+    },
+    "螺旋_点入口": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "luoxuanhuilang.png"
+                        ],
+                        "threshold": 0.85,
+                        "order_by": "Score"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^螺旋回廊$"
+                        ],
+                        "order_by": "Expected"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "螺旋_点敌人循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -370,
+                "y": 264
+            }
+        }
+    },
+    "螺旋_点敌人": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "baihuyouhun.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score",
+                "target_offset": [
+                    40,
+                    52,
+                    -80,
+                    -104
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "螺旋_点助战好友"
+        ],
+        "on_error": [
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -411,
+                "y": 41
+            }
+        }
+    },
+    "螺旋_点敌人循环": {
+        "timeout": 5000,
+        "next": [
+            "螺旋_点敌人"
+        ],
+        "on_error": [
+            "螺旋_翻页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -944,
+                "y": 493
+            }
+        }
+    },
+    "螺旋_翻页": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    625,
+                    585,
+                    210,
+                    130
+                ],
+                "template": [
+                    "guanka-fanye"
+                ],
+                "threshold": 0.68,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "螺旋_点敌人循环"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -735,
+                "y": -68
+            }
+        }
+    },
+    "多元_盲退": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "多元_尝试"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -552,
+                "y": 457
+            }
+        }
+    },
+    "多元_确认战斗页": {
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^活动$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": [
+                            15,
+                            235,
+                            145,
+                            70
+                        ]
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^挑战$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": [
+                            15,
+                            300,
+                            145,
+                            90
+                        ]
+                    }
+                ]
+            }
+        },
+        "pre_delay": 1500,
+        "timeout": 5000,
+        "focus": {
+            "Node.PipelineNode.Failed": "⚠️ 点了战斗但没进入战斗页，尝试退回重来"
+        },
+        "next": [
+            "多元_检测界面"
+        ],
+        "on_error": [
+            "多元_盲退"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -593,
+                "y": 207
+            }
+        }
+    },
+    "螺旋_点助战好友": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^选择助战好友$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "timeout": 15000,
+        "next": [
+            "螺旋_点备用装备"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -524,
+                "y": -265
+            }
+        }
+    },
+    "螺旋_点备用装备": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^备用装备$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "螺旋_点开战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 806,
+                "y": 17
+            }
+        }
+    },
+    "螺旋_点开战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^开战$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "timeout": 10000,
+        "next": [
+            "螺旋_点切换"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -265,
+                "y": 208
+            }
+        }
+    },
+    "螺旋_点切换": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "qiehuan_mask.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "timeout": 30000,
+        "next": [
+            "螺旋_等圈"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 722,
+                "y": -256
+            }
+        }
+    },
+    "螺旋_等圈": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "quan.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "timeout": 90000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 关卡未在设定时间内结束：未识别到圈"
+        },
+        "next": [
+            "螺旋_按右"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -60,
+                "y": -364
+            }
+        }
+    },
+    "螺旋_按右": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 22
+            }
+        },
+        "repeat": 10,
+        "repeat_delay": 500,
+        "next": [
+            "螺旋_看胜利"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 349,
+                "y": -370
+            }
+        }
+    },
+    "螺旋_看胜利": {
+        "timeout": 5000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 移动未能进圈：连点右方向键后 5 秒内未出现「胜利」"
+        },
+        "next": [
+            "螺旋_胜利"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -386,
+                "y": 188
+            }
+        }
+    },
+    "螺旋_胜利": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shengli.png"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "多元_收尾点战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -289,
+                "y": -29
+            }
+        }
+    },
+    "多元_收尾点战斗": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    755,
+                    42,
+                    30,
+                    30
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 30000,
+        "next": [
+            "多元_判断战斗主界面",
+            "多元_点活动返回",
+            "多元_回首页"
+        ],
+        "on_error": [
+            "多元_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -416,
+                "y": 200
+            }
+        }
+    },
+    "多元_判断战斗主界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "zhuxianhuodongtiaozhan"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "focus": {
+            "Node.PipelineNode.Succeeded": "识别战斗主界面成功"
+        },
+        "next": [
+            "多元_回首页"
+        ],
+        "on_error": [
+            "多元_点活动返回"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -416,
+                "y": 280
+            }
+        }
+    },
+    "多元_点活动返回": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "huodongfanhui"
+                ],
+                "threshold": 0.85,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 30000,
+        "next": [
+            "多元_判断战斗主界面",
+            "多元_点活动返回",
+            "多元_回首页"
+        ],
+        "on_error": [
+            "多元_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -200,
+                "y": 280
+            }
+        }
+    },
+    "购买_零时开始": {
+        "post_delay": 1500,
+        "next": [
+            "购买_零时点商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时点商店": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shangdian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^商店$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时检测商店主界面"
+        ],
+        "on_error": [
+            "购买_零时检测商店主界面"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时检测商店主界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shangdianzhujiemian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "成功识别商店主界面"
+        },
+        "next": [
+            "购买_零时点礼包商店"
+        ],
+        "on_error": [
+            "购买_零时再点商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时再点商店": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shangdian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^商店$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时检测商店主界面2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时检测商店主界面2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shangdianzhujiemian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "成功识别商店主界面",
+            "Node.PipelineNode.Failed": "未识别商店主界面"
+        },
+        "next": [
+            "购买_零时点礼包商店"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时点礼包商店": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "libaoshangdian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时点后魅礼包"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时点后魅礼包": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "houmeilibao"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时找馈礼循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时找馈礼": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "lingshikuili"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时检测确认弹窗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时上滑": {
+        "max_hit": 6,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    640,
+                    360
+                ],
+                "end": [
+                    [
+                        640,
+                        60
+                    ]
+                ],
+                "duration": 600
+            }
+        },
+        "post_delay": 1200,
+        "focus": {
+            "Node.PipelineNode.Failed": "未找到零时之种，可能已经被购买"
+        },
+        "next": [
+            "购买_零时找馈礼循环"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时检测确认弹窗": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "lingshikuiliquerengoumai"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^购买$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "点错了"
+        },
+        "next": [
+            "购买_零时点购买按钮"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时点购买按钮": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "lingshizhizhonggoumai"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^购买$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时检测购买成功"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时检测购买成功": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "goumaichenggong"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^购买成功$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时点确定"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时点确定": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "goumaichenggong"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^确定$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 1
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "购买_零时成功点商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时找馈礼循环": {
+        "timeout": 4000,
+        "next": [
+            "购买_零时找馈礼"
+        ],
+        "on_error": [
+            "购买_零时上滑",
+            "购买_零时退出点商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时退出点商店": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shangdian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^商店$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "⚠️ 未找到零时之种，可能已经被购买，正在退出商店"
+        },
+        "next": [
+            "购买_零时退出检测商店"
+        ],
+        "on_error": [
+            "购买_零时退出检测商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时退出检测商店": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shangdianzhujiemian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "成功识别商店主界面"
+        },
+        "next": [
+            "购买_零时退出点首页"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时退出点首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时成功点商店": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shangdian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^商店$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "购买成功，正在退出商店"
+        },
+        "next": [
+            "购买_零时成功检测商店"
+        ],
+        "on_error": [
+            "购买_零时成功检测商店"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时成功检测商店": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shangdianzhujiemian"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "post_delay": 1000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "成功识别商店主界面"
+        },
+        "next": [
+            "购买_零时成功点首页"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "购买_零时成功点首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_开始": {
+        "next": [
+            "探险_点首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到首页按钮，任务失败"
+        },
+        "next": [
+            "探险_点任务"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点任务": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "renwu"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到任务按钮，任务失败"
+        },
+        "next": [
+            "探险_点使魔探险"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点使魔探险": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "shimotanxian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^使魔探险$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到使魔探险，任务失败"
+        },
+        "next": [
+            "探险_领取循环"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_领取循环": {
+        "timeout": 4000,
+        "next": [
+            "探险_点领取奖励"
+        ],
+        "on_error": [
+            "探险_点选择使魔",
+            "探险_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点领取奖励": {
+        "max_hit": 7,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^点击领取奖励$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "post_delay": 1000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "领取奖励"
+        },
+        "next": [
+            "探险_领取循环"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点选择使魔": {
+        "max_hit": 4,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^点击选择使魔$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "探险_检测派遣"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_检测派遣": {
+        "timeout": 4000,
+        "next": [
+            "探险_点一键派遣"
+        ],
+        "on_error": [
+            "探险_点选择使魔",
+            "探险_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_派遣循环": {
+        "timeout": 4000,
+        "next": [
+            "探险_点选择使魔"
+        ],
+        "on_error": [
+            "探险_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点一键派遣": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "yijianpaiqian"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^一键派遣$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "⚠️ 疑似没有足够的使魔"
+        },
+        "next": [
+            "探险_点出发"
+        ],
+        "on_error": [
+            "探险_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_点出发": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "chufa"
+                        ],
+                        "threshold": 0.7,
+                        "order_by": "Score",
+                        "sub_name": "dlg"
+                    },
+                    {
+                        "recognition": "OCR",
+                        "expected": [
+                            "^出发$"
+                        ],
+                        "order_by": "Expected",
+                        "roi": "dlg"
+                    }
+                ],
+                "box_index": 0
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "⚠️ 疑似没有足够的使魔"
+        },
+        "next": [
+            "探险_派遣循环"
+        ],
+        "on_error": [
+            "探险_回首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "探险_回首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_开始": {
+        "next": [
+            "每日_点首页"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到首页按钮，任务失败"
+        },
+        "next": [
+            "每日_点任务"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点任务": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "renwu"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到任务按钮，任务失败"
+        },
+        "next": [
+            "每日_点存在感"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点存在感": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "cunzaigan"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到存在感，任务失败"
+        },
+        "next": [
+            "每日_点一键领取1"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点一键领取1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "yijianlingqv"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到一键领取，任务失败"
+        },
+        "next": [
+            "每日_点每周任务"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点每周任务": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "meizhourenwu"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到每周任务，任务失败"
+        },
+        "next": [
+            "每日_点一键领取2"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_点一键领取2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "yijianlingqv"
+                ],
+                "threshold": 0.7,
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 1500,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Failed": "❌ 未识别到一键领取，任务失败"
+        },
+        "next": [
+            "每日_回首页"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "每日_回首页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "shouye"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ],
+                "order_by": "Score"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "检测主界面"
+        ],
+        "on_error": [
+            "结束"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    }
+}
