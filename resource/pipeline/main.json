@@ -225,7 +225,7 @@
             "启动检测_UC"
         ],
         "on_error": [
-            "启动_完成"
+            "启动_腾讯"
         ],
         "$__mpe_code": {
             "position": {
@@ -250,11 +250,149 @@
             "启动_完成"
         ],
         "on_error": [
-            "启动_完成"
+            "启动_腾讯"
         ],
         "$__mpe_code": {
             "position": {
                 "x": 480,
+                "y": -160
+            }
+        }
+    },
+    "启动_腾讯": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv22144.tencent"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_腾讯"
+        ],
+        "on_error": [
+            "启动_B服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_腾讯": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_B服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 800,
+                "y": -160
+            }
+        }
+    },
+    "启动_B服": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv2BiliBiliRelease"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_B服"
+        ],
+        "on_error": [
+            "启动_测试服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_B服": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_测试服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1120,
+                "y": -160
+            }
+        }
+    },
+    "启动_测试服": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv2Beta"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_测试服"
+        ],
+        "on_error": [
+            "启动_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1280,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_测试服": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1440,
                 "y": -160
             }
         }

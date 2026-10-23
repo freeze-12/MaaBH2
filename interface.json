@@ -1,8 +1,8 @@
 {
     "interface_version": 2,
-    "name": "崩崩自动化",
-    "description": "崩崩自动化：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道与混服）",
-    "version": "0.2.0",
+    "name": "MaaBh2",
+    "description": "MaaBh2：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道、混服、腾讯服、B 服与测试服）",
+    "version": "0.2.1",
     "license": "MIT",
     "controller": [
         {
@@ -27,6 +27,7 @@
         {
             "name": "1. 启动游戏",
             "entry": "StartGame",
+            "description": "优先识别选项「启动渠道」选择的包，启动失败则进入轮询链依次尝试：国服 → 混服 → UC → 腾讯 → B服 → 测试服。",
             "option": [
                 "启动渠道"
             ]
@@ -34,14 +35,15 @@
         {
             "name": "2. 进入游戏（自选服务器）",
             "entry": "进入游戏_开始",
+            "description": "可以选择的带下拉选项的区服请使用这个任务进入游戏，然后选「上次登录」。",
             "option": [
                 "选择服务器"
             ]
         },
         {
-            "name": "2b. 进入游戏（国服/腾讯服）",
+            "name": "11. 进入游戏（国服/腾讯服/测试服）",
             "entry": "国服进入游戏_开始",
-            "description": "国服/腾讯服专用：点开后没有选择服务器界面，直接识别「账号切换」，识别到就点屏幕中央三下进入。若在更新（识别到「快给我下」）则点下载等更新，更新结束识别到「账号切换」再点三下。"
+            "description": "不可选择、没有下拉框的区服请选择这个任务。"
         },
         {
             "name": "3. 清理弹窗",
@@ -179,6 +181,30 @@
                     "pipeline_override": {
                         "StartGame": {
                             "package": "com.miHoYo.HSoDv2.mix"
+                        }
+                    }
+                },
+                {
+                    "name": "腾讯服",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv22144.tencent"
+                        }
+                    }
+                },
+                {
+                    "name": "B 服",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv2BiliBiliRelease"
+                        }
+                    }
+                },
+                {
+                    "name": "测试服",
+                    "pipeline_override": {
+                        "StartGame": {
+                            "package": "com.miHoYo.HSoDv2Beta"
                         }
                     }
                 }
