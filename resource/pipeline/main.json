@@ -125,16 +125,190 @@
         "action": {
             "type": "StartApp",
             "param": {
-                "package": "com.miHoYo.HSoDv22144.uc"
+                "package": "com.miHoYo.HSoDv2Original"
             }
         },
-        "post_delay": 8000,
+        "post_delay": 2000,
+        "next": [
+            "启动检测_选项"
+        ],
         "on_error": [
-            "启动_备用"
+            "启动_国服"
         ],
         "$__mpe_code": {
             "position": {
                 "x": 240,
+                "y": 0
+            }
+        }
+    },
+    "启动检测_选项": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_国服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 400,
+                "y": 0
+            }
+        }
+    },
+    "启动_国服": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv2Original"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_国服"
+        ],
+        "on_error": [
+            "启动_混服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_国服": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_混服"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 160,
+                "y": -160
+            }
+        }
+    },
+    "启动_UC": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv22144.uc"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_UC"
+        ],
+        "on_error": [
+            "启动_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_UC": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 480,
+                "y": -160
+            }
+        }
+    },
+    "启动_混服": {
+        "action": {
+            "type": "StartApp",
+            "param": {
+                "package": "com.miHoYo.HSoDv2.mix"
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "启动检测_混服"
+        ],
+        "on_error": [
+            "启动_UC"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": -160
+            }
+        }
+    },
+    "启动检测_混服": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "崩坏学园"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "inverse": true,
+        "timeout": 4000,
+        "next": [
+            "启动_完成"
+        ],
+        "on_error": [
+            "启动_UC"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 800,
+                "y": -160
+            }
+        }
+    },
+    "启动_完成": {
+        "$__mpe_code": {
+            "position": {
+                "x": 800,
                 "y": 0
             }
         }
@@ -149,6 +323,61 @@
             "position": {
                 "x": 0,
                 "y": 393
+            }
+        }
+    },
+    "国服进入游戏_开始": {
+        "timeout": -1,
+        "next": [
+            "国服进入游戏_检测更新",
+            "进入游戏_识别切换账号"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 470
+            }
+        }
+    },
+    "国服进入游戏_检测更新": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^快给我下$"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 4,
+        "repeat_delay": 500,
+        "post_delay": 2000,
+        "timeout": 10000,
+        "focus": {
+            "Node.PipelineNode.Succeeded": "游戏有更新正在更新"
+        },
+        "next": [
+            "国服进入游戏_等更新完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 160,
+                "y": 470
+            }
+        }
+    },
+    "国服进入游戏_等更新完成": {
+        "timeout": -1,
+        "next": [
+            "进入游戏_识别切换账号"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 530
             }
         }
     },
@@ -292,6 +521,40 @@
             "position": {
                 "x": 1280,
                 "y": 587
+            }
+        }
+    },
+    "进入游戏_识别切换账号": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "账号切换"
+                ],
+                "order_by": "Expected"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    640,
+                    360
+                ]
+            }
+        },
+        "repeat": 3,
+        "repeat_delay": 300,
+        "pre_delay": 3000,
+        "post_delay": 2000,
+        "timeout": -1,
+        "next": [
+            "进入游戏_完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1280,
+                "y": 660
             }
         }
     },

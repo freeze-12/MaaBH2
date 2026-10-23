@@ -1,7 +1,7 @@
 {
     "interface_version": 2,
     "name": "崩崩自动化",
-    "description": "崩崩自动化：崩坏学园2（UC 渠道服 / com.miHoYo.HSoDv22144.uc）",
+    "description": "崩崩自动化：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道与混服）",
     "version": "0.2.0",
     "license": "MIT",
     "controller": [
@@ -37,6 +37,11 @@
             "option": [
                 "选择服务器"
             ]
+        },
+        {
+            "name": "2b. 进入游戏（国服/腾讯服）",
+            "entry": "国服进入游戏_开始",
+            "description": "国服/腾讯服专用：点开后没有选择服务器界面，直接识别「账号切换」，识别到就点屏幕中央三下进入。若在更新（识别到「快给我下」）则点下载等更新，更新结束识别到「账号切换」再点三下。"
         },
         {
             "name": "3. 清理弹窗",
@@ -154,10 +159,10 @@
             "type": "select",
             "cases": [
                 {
-                    "name": "默认（优先 UC）",
+                    "name": "国服（官方）",
                     "pipeline_override": {
                         "StartGame": {
-                            "package": "com.miHoYo.HSoDv22144.uc"
+                            "package": "com.miHoYo.HSoDv2Original"
                         }
                     }
                 },
