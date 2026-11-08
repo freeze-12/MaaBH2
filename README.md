@@ -20,17 +20,27 @@
 
 ## 快速部署（推荐）
 
-本项目以 **MFA 资源包** 的形式分发。有三种运行方式：
+本项目以 **MFA 资源包** 的形式分发。本仓库**只发布脚本本体**（约 2 MB），MFA 客户端请从官方仓库下载，这样你拿到的永远是最新版。
 
-### 方式零：完全没用过 MFA（新手推荐）
+### 方式零：完全没用过 MFA（新手看这里）
 
-到 [Releases](https://github.com/freeze-12/MaaBH2/releases) 下载文件名带 **「一键包」** 的那个 zip（约 116 MB），解压后双击里面的 `1 开始使用.bat` 即可。
+一共三步，十分钟能搞定。
 
-- 包里已经包含 MFAAvalonia 程序本体，**不需要**自己另外装 MFA
-- 第一次运行会自动检查并安装缺失的运行库，弹窗点「是」就行
-- 详细图文步骤在包内的 `使用说明.html`
+**第 1 步 · 装 MFA 本体**
 
-> 只想更新脚本、已经有 MFA 的老用户，下载体积小的 `MaaBH2-vX.X.X.zip` 拖进 MFA 窗口覆盖即可。
+打开 [MFAAvalonia Releases](https://github.com/MaaXYZ/MFAAvalonia/releases)，找最新一版，下载名字形如 `MFAAvalonia-v2.x.x-win-x64.zip` 的压缩包（**不要**下 `Source code` 那两个），解压到**没有中文和空格**的目录，比如 `D:\MFA`。
+
+**第 2 步 · 装运行库并启动**
+
+双击 `MFAAvalonia.exe`。如果提示缺少 .NET，按提示安装 [.NET 10 桌面运行库](https://dotnet.microsoft.com/download/dotnet/10.0)（选 **Desktop Runtime** → **x64**），装完再启动一次。
+
+**第 3 步 · 装本脚本**
+
+回到本页 [Releases](https://github.com/freeze-12/MaaBH2/releases)，下载 `MaaBH2-vX.X.X.zip`，**直接把它拖进 MFA 窗口**，弹窗点确认，脚本会自动铺进 `resource` 目录。
+
+任务列表里能看到「社团领取」「共鸣屋每日刷新」这些任务，就说明装好了。
+
+> 已经装好 MFA 的老用户：以后更新只需要重复第 3 步，拖新 zip 覆盖即可，任务勾选不会丢。
 
 ### 方式一：用 AUTO-MAS 托管（强烈推荐）
 
@@ -163,3 +173,5 @@ A：进地图涉及角色切换，如「菲米莉丝」这类会弹窗的角色�
 
 - [MaaFramework](https://github.com/MaaXYZ/MaaFramework)（LGPL-3.0）—— 自动化框架
 - [MFAAvalonia](https://github.com/MaaXYZ/MFAAvalonia)（GPL-3.0）—— 通用 GUI 客户端
+
+本仓库**不包含**上述软件的二进制文件与 OCR 模型，只包含本项目自己编写的 `interface.json`、Pipeline 节点与图像模板；客户端请自行从官方仓库获取。
