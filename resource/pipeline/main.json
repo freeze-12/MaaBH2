@@ -704,40 +704,6 @@
       }
     }
   },
-  "OpenAppsFolder": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "roi": [
-          80,
-          100,
-          300,
-          180
-        ],
-        "template": "sys_apps.png",
-        "threshold": 0.7
-      }
-    },
-    "pre_delay": 300,
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          20,
-          20,
-          -40,
-          -40
-        ]
-      }
-    },
-    "post_delay": 1200,
-    "$__mpe_code": {
-      "position": {
-        "x": 480,
-        "y": 0
-      }
-    }
-  },
   "清理弹窗_入口": {
     "next": [
       "清弹窗",
@@ -1831,7 +1797,7 @@
     "post_delay": 1500,
     "timeout": 8000,
     "next": [
-      "关卡选择链_备用_进活动1"
+      "关卡选择链_备用_进活动1_入口"
     ],
     "on_error": [
       "结束"
@@ -1857,12 +1823,137 @@
     },
     "post_delay": 2000,
     "next": [
+      "关卡选择链_备用_进活动1_后检测",
       "关卡选择链_备用_循环1"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
+      }
+    }
+  },
+  "关卡选择链_备用_进活动1_入口": {
+    "next": [
+      "关卡选择链_备用_进活动1_前检测",
+      "关卡选择链_备用_进活动1"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动1_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动1_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 220,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动1_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "关卡选择链_备用_进活动1"
+    ],
+    "on_error": [
+      "关卡选择链_备用_进活动1"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 440,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动1_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动1_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 660,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动1_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "关卡选择链_备用_下滑到顶"
+    ],
+    "on_error": [
+      "关卡选择链_备用_下滑到顶"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 880,
+        "y": 4000
       }
     }
   },
@@ -1931,7 +2022,7 @@
     },
     "post_delay": 1500,
     "next": [
-      "关卡选择链_备用_进活动2"
+      "关卡选择链_备用_进活动2_入口"
     ],
     "on_error": [
       "结束"
@@ -1957,12 +2048,137 @@
     },
     "post_delay": 2000,
     "next": [
+      "关卡选择链_备用_进活动2_后检测",
       "关卡选择链_备用_循环2"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
+      }
+    }
+  },
+  "关卡选择链_备用_进活动2_入口": {
+    "next": [
+      "关卡选择链_备用_进活动2_前检测",
+      "关卡选择链_备用_进活动2"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1050,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动2_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动2_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1270,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动2_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "关卡选择链_备用_进活动2"
+    ],
+    "on_error": [
+      "关卡选择链_备用_进活动2"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1490,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动2_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动2_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1710,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动2_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "关卡选择链_备用_进活动1_入口"
+    ],
+    "on_error": [
+      "关卡选择链_备用_进活动1_入口"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1930,
+        "y": 4000
       }
     }
   },
@@ -2064,7 +2280,7 @@
     "repeat_delay": 500,
     "post_delay": 1000,
     "next": [
-      "关卡选择链_备用_进活动3"
+      "关卡选择链_备用_进活动3_入口"
     ],
     "$__mpe_code": {
       "position": {
@@ -2094,7 +2310,7 @@
     "repeat_delay": 500,
     "post_delay": 1000,
     "next": [
-      "关卡选择链_备用_进活动4"
+      "关卡选择链_备用_进活动4_入口"
     ],
     "$__mpe_code": {
       "position": {
@@ -2117,12 +2333,137 @@
     },
     "post_delay": 2000,
     "next": [
+      "关卡选择链_备用_进活动4_后检测",
       "关卡选择链_备用_循环4"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
+      }
+    }
+  },
+  "关卡选择链_备用_进活动4_入口": {
+    "next": [
+      "关卡选择链_备用_进活动4_前检测",
+      "关卡选择链_备用_进活动4"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3150,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动4_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动4_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3370,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动4_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "关卡选择链_备用_进活动4"
+    ],
+    "on_error": [
+      "关卡选择链_备用_进活动4"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3590,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动4_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动4_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3810,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动4_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "结束"
+    ],
+    "on_error": [
+      "结束"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 4030,
+        "y": 4000
       }
     }
   },
@@ -2191,7 +2532,7 @@
     },
     "post_delay": 1500,
     "next": [
-      "关卡选择链_备用_进活动1"
+      "关卡选择链_备用_进活动1_入口"
     ],
     "on_error": [
       "结束"
@@ -2217,12 +2558,137 @@
     },
     "post_delay": 2000,
     "next": [
+      "关卡选择链_备用_进活动3_后检测",
       "关卡选择链_备用_循环3"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
+      }
+    }
+  },
+  "关卡选择链_备用_进活动3_入口": {
+    "next": [
+      "关卡选择链_备用_进活动3_前检测",
+      "关卡选择链_备用_进活动3"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2100,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动3_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动3_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2320,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动3_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "关卡选择链_备用_进活动3"
+    ],
+    "on_error": [
+      "关卡选择链_备用_进活动3"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2540,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动3_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "关卡选择链_备用_进活动3_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2760,
+        "y": 4000
+      }
+    }
+  },
+  "关卡选择链_备用_进活动3_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "关卡选择链_备用_下滑到顶_右下"
+    ],
+    "on_error": [
+      "关卡选择链_备用_下滑到顶_右下"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2980,
+        "y": 4000
       }
     }
   },
@@ -8880,7 +9346,7 @@
       "Node.PipelineNode.Succeeded": "点「活动」标签"
     },
     "next": [
-      "开荒_进活动1"
+      "开荒_进活动1_入口"
     ],
     "on_error": [
       "开荒_点活动返回",
@@ -8974,11 +9440,136 @@
       "Node.PipelineNode.Succeeded": "进入活动卡位1"
     },
     "next": [
+      "开荒_进活动1_后检测",
       "开荒_找关卡1"
     ],
     "on_error": [
       "开荒_找关卡1"
     ]
+  },
+  "开荒_进活动1_入口": {
+    "next": [
+      "开荒_进活动1_前检测",
+      "开荒_进活动1"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动1_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动1_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 220,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动1_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "开荒_进活动1"
+    ],
+    "on_error": [
+      "开荒_进活动1"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 440,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动1_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动1_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 660,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动1_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "开荒_下滑到顶"
+    ],
+    "on_error": [
+      "开荒_下滑到顶"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 880,
+        "y": 4600
+      }
+    }
   },
   "开荒_进活动2": {
     "action": {
@@ -8997,11 +9588,136 @@
       "Node.PipelineNode.Succeeded": "进入活动卡位2"
     },
     "next": [
+      "开荒_进活动2_后检测",
       "开荒_找关卡2"
     ],
     "on_error": [
       "开荒_找关卡2"
     ]
+  },
+  "开荒_进活动2_入口": {
+    "next": [
+      "开荒_进活动2_前检测",
+      "开荒_进活动2"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1050,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动2_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动2_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1270,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动2_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "开荒_进活动2"
+    ],
+    "on_error": [
+      "开荒_进活动2"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1490,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动2_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动2_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1710,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动2_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "开荒_进活动1_入口"
+    ],
+    "on_error": [
+      "开荒_进活动1_入口"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 1930,
+        "y": 4600
+      }
+    }
   },
   "开荒_进活动3": {
     "action": {
@@ -9020,11 +9736,136 @@
       "Node.PipelineNode.Succeeded": "进入活动卡位3"
     },
     "next": [
+      "开荒_进活动3_后检测",
       "开荒_找关卡3"
     ],
     "on_error": [
       "开荒_找关卡3"
     ]
+  },
+  "开荒_进活动3_入口": {
+    "next": [
+      "开荒_进活动3_前检测",
+      "开荒_进活动3"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2100,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动3_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动3_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2320,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动3_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "开荒_进活动3"
+    ],
+    "on_error": [
+      "开荒_进活动3"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2540,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动3_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动3_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2760,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动3_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "开荒_下滑到顶_右下"
+    ],
+    "on_error": [
+      "开荒_下滑到顶_右下"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2980,
+        "y": 4600
+      }
+    }
   },
   "开荒_找关卡1": {
     "next": [
@@ -9185,7 +10026,7 @@
     },
     "timeout": 2000,
     "next": [
-      "开荒_进活动2"
+      "开荒_进活动2_入口"
     ],
     "on_error": [
       "开荒_返回1"
@@ -9338,7 +10179,7 @@
     "repeat_delay": 500,
     "post_delay": 1000,
     "next": [
-      "开荒_进活动3"
+      "开荒_进活动3_入口"
     ]
   },
   "开荒_下滑到顶_右下": {
@@ -9362,7 +10203,7 @@
     "repeat_delay": 500,
     "post_delay": 1000,
     "next": [
-      "开荒_进活动4"
+      "开荒_进活动4_入口"
     ]
   },
   "开荒_进活动4": {
@@ -9382,11 +10223,136 @@
       "Node.PipelineNode.Succeeded": "进入活动卡位4"
     },
     "next": [
+      "开荒_进活动4_后检测",
       "开荒_找关卡4"
     ],
     "on_error": [
       "开荒_找关卡4"
     ]
+  },
+  "开荒_进活动4_入口": {
+    "next": [
+      "开荒_进活动4_前检测",
+      "开荒_进活动4"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3150,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动4_前检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动4_前确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3370,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动4_前确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 2000,
+    "post_delay": 1200,
+    "next": [
+      "开荒_进活动4"
+    ],
+    "on_error": [
+      "开荒_进活动4"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3590,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动4_后检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          ".*不在活动时间内.*"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "next": [
+      "开荒_进活动4_后确定"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 3810,
+        "y": 4600
+      }
+    }
+  },
+  "开荒_进活动4_后确定": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定"
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          10,
+          10,
+          -20,
+          -20
+        ]
+      }
+    },
+    "timeout": 5000,
+    "post_delay": 1500,
+    "next": [
+      "开荒_开荒完成"
+    ],
+    "on_error": [
+      "开荒_开荒完成"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 4030,
+        "y": 4600
+      }
+    }
   },
   "开荒_找关卡4": {
     "next": [
@@ -9521,7 +10487,7 @@
     },
     "timeout": 2000,
     "next": [
-      "开荒_进活动1"
+      "开荒_进活动1_入口"
     ],
     "on_error": [
       "开荒_返回4"
