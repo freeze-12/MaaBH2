@@ -3561,11 +3561,79 @@
     },
     "post_delay": 1500,
     "next": [
+      "使魔的爱_体力不足检测",
       "使魔的爱_确认框"
     ],
     "$__mpe_code": {
       "position": {
         "x": -488,
+        "y": 53
+      }
+    },
+    "on_error": [
+      "使魔的爱_回战斗"
+    ],
+    "focus": {
+      "Node.PipelineNode.Failed": "⚠️ 使魔的爱：点快捷战斗后超时，走回战斗兜底"
+    }
+  },
+  "使魔的爱_体力不足检测": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "无法进入战斗",
+          "没有体力"
+        ],
+        "roi": [
+          380,
+          220,
+          520,
+          150
+        ],
+        "order_by": "Expected"
+      }
+    },
+    "timeout": 1500,
+    "focus": {
+      "Node.PipelineNode.Succeeded": "⚠️ 使魔的爱：体力不足，跳过"
+    },
+    "next": [
+      "使魔的爱_体力不足_点确定"
+    ],
+    "on_error": [
+      "使魔的爱_确认框"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": -640,
+        "y": 53
+      }
+    }
+  },
+  "使魔的爱_体力不足_点确定": {
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          620,
+          433,
+          40,
+          20
+        ]
+      }
+    },
+    "post_delay": 1500,
+    "timeout": 3000,
+    "next": [
+      "使魔的爱_回战斗"
+    ],
+    "on_error": [
+      "使魔的爱_回战斗"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": -800,
         "y": 53
       }
     }
@@ -8889,23 +8957,30 @@
   },
   "开荒_点关卡": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "roi": [
-          0,
-          180,
-          1280,
-          440
-        ],
-        "template": [
-          "bonus2"
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.82,
-          0.72
-        ],
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "baika"
+            ],
+            "green_mask": true,
+            "threshold": [
+              0.8,
+              0.78,
+              0.76,
+              0.76
+            ],
+            "order_by": "Score",
+            "roi": [
+              0,
+              180,
+              1280,
+              440
+            ]
+          }
+        ]
       }
     },
     "action": {
@@ -9138,23 +9213,30 @@
   },
   "开荒_打完点卡": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "roi": [
-          0,
-          180,
-          1280,
-          440
-        ],
-        "template": [
-          "bonus2"
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.82,
-          0.72
-        ],
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "baika"
+            ],
+            "green_mask": true,
+            "threshold": [
+              0.8,
+              0.78,
+              0.76,
+              0.76
+            ],
+            "order_by": "Score",
+            "roi": [
+              0,
+              180,
+              1280,
+              440
+            ]
+          }
+        ]
       }
     },
     "action": {
@@ -33000,7 +33082,7 @@
       "空想_退出_点活动返回"
     ],
     "on_error": [
-      "空想_退出_回首页"
+      "空想_退出_回首页_收尾"
     ],
     "$__mpe_code": {
       "position": {
@@ -33022,11 +33104,11 @@
     },
     "timeout": 2000,
     "next": [
-      "空想_退出_回首页"
+      "空想_退出_回首页_收尾"
     ],
     "on_error": [
       "空想_退出_点活动返回",
-      "空想_退出_回首页"
+      "空想_退出_回首页_收尾"
     ],
     "$__mpe_code": {
       "position": {
@@ -33065,6 +33147,72 @@
       "position": {
         "x": 2000,
         "y": 9780
+      }
+    }
+  },
+  "空想_退出_回首页_收尾": {
+    "recognition": {
+      "type": "TemplateMatch",
+      "param": {
+        "template": [
+          "shouye"
+        ],
+        "green_mask": true,
+        "threshold": [
+          0.7
+        ],
+        "order_by": "Score"
+      }
+    },
+    "action": {
+      "type": "Click"
+    },
+    "post_delay": 1500,
+    "max_hit": 3,
+    "timeout": 10000,
+    "focus": {
+      "Node.PipelineNode.Succeeded": "🏁 空想迷域：本周已无次数，点首页收尾"
+    },
+    "next": [
+      "空想_退出_确认主界面_收尾"
+    ],
+    "on_error": [
+      "结束"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2300,
+        "y": 9780
+      }
+    }
+  },
+  "空想_退出_确认主界面_收尾": {
+    "recognition": {
+      "type": "TemplateMatch",
+      "param": {
+        "template": [
+          "zhujiemian"
+        ],
+        "threshold": 0.7,
+        "order_by": "Score",
+        "green_mask": true
+      }
+    },
+    "timeout": 8000,
+    "focus": {
+      "Node.PipelineNode.Succeeded": "✅ 空想迷域：已回到主界面，任务正常结束（不再循环）",
+      "Node.PipelineNode.Failed": "⚠️ 空想迷域：收尾未确认到主界面，直接结束"
+    },
+    "next": [
+      "结束"
+    ],
+    "on_error": [
+      "结束"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 2300,
+        "y": 9920
       }
     }
   },
@@ -37376,10 +37524,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -37393,10 +37541,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -39004,7 +39152,7 @@
     },
     "next": [
       "七星燧发_找枪7",
-      "七星燧发_下滚7"
+      "七星燧发_回顶1"
     ],
     "$__mpe_code": {
       "position": {
@@ -39013,652 +39161,556 @@
       }
     }
   },
-  "七星燧发_下滚7": {
+  "七星燧发_回顶1": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪8",
-      "七星燧发_下滚8"
+      "七星燧发_回顶2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6920,
-        "y": 12700
+        "x": 4200,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚8": {
+  "七星燧发_回顶2": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪9",
-      "七星燧发_下滚9"
+      "七星燧发_回顶3"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 7320,
-        "y": 12700
+        "x": 4380,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚9": {
+  "七星燧发_回顶3": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪10",
-      "七星燧发_下滚10"
+      "七星燧发_回顶4"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4520,
-        "y": 13160
+        "x": 4560,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚10": {
+  "七星燧发_回顶4": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 700,
     "next": [
-      "七星燧发_找枪11",
-      "七星燧发_下滚11"
+      "七星燧发_找枪B1",
+      "七星燧发_下滚B1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4920,
-        "y": 13160
+        "x": 4740,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚11": {
+  "七星燧发_回顶B1": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪12",
-      "七星燧发_下滚12"
+      "七星燧发_回顶B2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5320,
-        "y": 13160
+        "x": 6000,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚12": {
+  "七星燧发_回顶B2": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪13",
-      "七星燧发_下滚13"
+      "七星燧发_回顶B3"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5720,
-        "y": 13160
+        "x": 6180,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚13": {
+  "七星燧发_回顶B3": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 250,
     "next": [
-      "七星燧发_找枪14",
-      "七星燧发_下滚14"
+      "七星燧发_回顶B4"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6120,
-        "y": 13160
+        "x": 6360,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚14": {
+  "七星燧发_回顶B4": {
     "action": {
       "type": "Swipe",
       "param": {
         "begin": [
           640,
-          540
+          620
         ],
         "end": [
           [
             640,
-            340
+            120
           ]
         ],
-        "duration": 450
+        "duration": 700
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "timeout": 3000,
+    "post_delay": 700,
     "next": [
-      "七星燧发_找枪15",
-      "七星燧发_下滚15"
+      "七星燧发_找枪C1",
+      "七星燧发_下滚C1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6520,
-        "y": 13160
+        "x": 6540,
+        "y": 14000
       }
     }
   },
-  "七星燧发_下滚15": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B1": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪16",
-      "七星燧发_下滚16"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6920,
-        "y": 13160
+        "x": 4200,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚16": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B2": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪17",
-      "七星燧发_下滚17"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 7320,
-        "y": 13160
+        "x": 4370,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚17": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B3": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪18",
-      "七星燧发_下滚18"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B3"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4520,
-        "y": 13620
+        "x": 4540,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚18": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B4": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪19",
-      "七星燧发_下滚19"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B4"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4920,
-        "y": 13620
+        "x": 4710,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚19": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B5": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪20",
-      "七星燧发_下滚20"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B5"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5320,
-        "y": 13620
+        "x": 4880,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚20": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B6": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪21",
-      "七星燧发_下滚21"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚B6"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5720,
-        "y": 13620
+        "x": 5050,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚21": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪B7": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪22",
-      "七星燧发_下滚22"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_回顶1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6120,
-        "y": 13620
+        "x": 5220,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚22": {
+  "七星燧发_下滚B1": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39675,33 +39727,20 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪23",
-      "七星燧发_下滚23"
+      "七星燧发_找枪B2",
+      "七星燧发_下滚B2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6520,
-        "y": 13620
+        "x": 4200,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚23": {
+  "七星燧发_下滚B2": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39718,33 +39757,20 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪24",
-      "七星燧发_下滚24"
+      "七星燧发_找枪B3",
+      "七星燧发_下滚B3"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6920,
-        "y": 13620
+        "x": 4370,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚24": {
+  "七星燧发_下滚B3": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39761,33 +39787,20 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪25",
-      "七星燧发_下滚25"
+      "七星燧发_找枪B4",
+      "七星燧发_下滚B4"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 7320,
-        "y": 13620
+        "x": 4540,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚25": {
+  "七星燧发_下滚B4": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39804,33 +39817,20 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪26",
-      "七星燧发_下滚26"
+      "七星燧发_找枪B5",
+      "七星燧发_下滚B5"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4520,
-        "y": 14080
+        "x": 4710,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚26": {
+  "七星燧发_下滚B5": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39847,33 +39847,20 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪27",
-      "七星燧发_下滚27"
+      "七星燧发_找枪B6",
+      "七星燧发_下滚B6"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 4920,
-        "y": 14080
+        "x": 4880,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚27": {
+  "七星燧发_下滚B6": {
     "action": {
       "type": "Swipe",
       "param": {
@@ -39890,246 +39877,511 @@
         "duration": 450
       }
     },
-    "post_delay": 0,
     "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
-    },
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪28",
-      "七星燧发_下滚28"
+      "七星燧发_找枪B7",
+      "七星燧发_回顶B1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5320,
-        "y": 14080
+        "x": 5050,
+        "y": 13720
       }
     }
   },
-  "七星燧发_下滚28": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪C1": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪29",
-      "七星燧发_下滚29"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C1"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 5720,
-        "y": 14080
+        "x": 6000,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚29": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪C2": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪30",
-      "七星燧发_下滚30"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6120,
-        "y": 14080
+        "x": 6170,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚30": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪C3": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪31",
-      "七星燧发_下滚31"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C3"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6520,
-        "y": 14080
+        "x": 6340,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚31": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪C4": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
     "next": [
-      "七星燧发_找枪32",
-      "七星燧发_下滚32"
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C4"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 6920,
-        "y": 14080
+        "x": 6510,
+        "y": 13600
       }
     }
   },
-  "七星燧发_下滚32": {
-    "action": {
-      "type": "Swipe",
+  "七星燧发_找枪C5": {
+    "recognition": {
+      "type": "TemplateMatch",
       "param": {
-        "begin": [
-          640,
-          540
+        "template": [
+          "qixing_gun"
         ],
-        "end": [
-          [
-            640,
-            340
-          ]
-        ],
-        "duration": 450
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
       }
     },
-    "post_delay": 0,
-    "timeout": 6000,
-    "post_wait_freezes": {
-      "time": 200,
-      "threshold": 0.88,
-      "method": 5,
-      "rate_limit": 100,
-      "timeout": 2500,
-      "target": [
-        0,
-        0,
-        1280,
-        720
-      ]
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
     },
+    "post_delay": 400,
+    "timeout": 2500,
+    "next": [
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C5"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6680,
+        "y": 13600
+      }
+    }
+  },
+  "七星燧发_找枪C6": {
+    "recognition": {
+      "type": "TemplateMatch",
+      "param": {
+        "template": [
+          "qixing_gun"
+        ],
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
+    },
+    "post_delay": 400,
+    "timeout": 2500,
+    "next": [
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚C6"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6850,
+        "y": 13600
+      }
+    }
+  },
+  "七星燧发_找枪C7": {
+    "recognition": {
+      "type": "TemplateMatch",
+      "param": {
+        "template": [
+          "qixing_gun"
+        ],
+        "green_mask": false,
+        "threshold": 0.8,
+        "order_by": "Score",
+        "roi": [
+          0,
+          80,
+          1280,
+          615
+        ]
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target_offset": [
+          308,
+          87,
+          -85,
+          -85
+        ]
+      }
+    },
+    "post_delay": 400,
+    "timeout": 2500,
+    "next": [
+      "七星燧发_弹窗数量",
+      "七星燧发_弹窗_点数不足"
+    ],
     "on_error": [
       "七星燧发_没找到枪"
     ],
+    "$__mpe_code": {
+      "position": {
+        "x": 7020,
+        "y": 13600
+      }
+    }
+  },
+  "七星燧发_下滚C1": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
     "next": [
-      "七星燧发_找枪33"
+      "七星燧发_找枪C2",
+      "七星燧发_下滚C2"
     ],
     "$__mpe_code": {
       "position": {
-        "x": 7320,
-        "y": 14080
+        "x": 6000,
+        "y": 13720
+      }
+    }
+  },
+  "七星燧发_下滚C2": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
+    "next": [
+      "七星燧发_找枪C3",
+      "七星燧发_下滚C3"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6170,
+        "y": 13720
+      }
+    }
+  },
+  "七星燧发_下滚C3": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
+    "next": [
+      "七星燧发_找枪C4",
+      "七星燧发_下滚C4"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6340,
+        "y": 13720
+      }
+    }
+  },
+  "七星燧发_下滚C4": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
+    "next": [
+      "七星燧发_找枪C5",
+      "七星燧发_下滚C5"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6510,
+        "y": 13720
+      }
+    }
+  },
+  "七星燧发_下滚C5": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
+    "next": [
+      "七星燧发_找枪C6",
+      "七星燧发_下滚C6"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6680,
+        "y": 13720
+      }
+    }
+  },
+  "七星燧发_下滚C6": {
+    "action": {
+      "type": "Swipe",
+      "param": {
+        "begin": [
+          640,
+          540
+        ],
+        "end": [
+          [
+            640,
+            340
+          ]
+        ],
+        "duration": 450
+      }
+    },
+    "timeout": 6000,
+    "post_delay": 0,
+    "next": [
+      "七星燧发_找枪C7",
+      "七星燧发_没找到枪"
+    ],
+    "$__mpe_code": {
+      "position": {
+        "x": 6850,
+        "y": 13720
       }
     }
   },
@@ -40138,10 +40390,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40155,10 +40407,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40173,6 +40425,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚2"
     ]
   },
   "七星燧发_找枪3": {
@@ -40180,10 +40435,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40197,10 +40452,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40215,6 +40470,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚3"
     ]
   },
   "七星燧发_找枪4": {
@@ -40222,10 +40480,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40239,10 +40497,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40257,6 +40515,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚4"
     ]
   },
   "七星燧发_找枪5": {
@@ -40264,10 +40525,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40281,10 +40542,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40299,6 +40560,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚5"
     ]
   },
   "七星燧发_找枪6": {
@@ -40306,10 +40570,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40323,10 +40587,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40341,6 +40605,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_下滚6"
     ]
   },
   "七星燧发_找枪7": {
@@ -40348,10 +40615,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -40365,10 +40632,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -40383,1098 +40650,9 @@
     "next": [
       "七星燧发_弹窗数量",
       "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪8": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6920,
-        "y": 14500
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪9": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 7320,
-        "y": 14500
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪10": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4520,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪11": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4920,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪12": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5320,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪13": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5720,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪14": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6120,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪15": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6520,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪16": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6920,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪17": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 7320,
-        "y": 14940
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪18": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4520,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪19": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4920,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪20": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5320,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪21": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5720,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪22": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6120,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪23": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6520,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪24": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6920,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪25": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 7320,
-        "y": 15380
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪26": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4520,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪27": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 4920,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪28": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5320,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪29": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 5720,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪30": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6120,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪31": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6520,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪32": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 6920,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
-    ]
-  },
-  "七星燧发_找枪33": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "qixing_card"
-        ],
-        "green_mask": true,
-        "threshold": 0.93,
-        "order_by": "Score",
-        "roi": [
-          0,
-          80,
-          1280,
-          615
-        ]
-      }
-    },
-    "action": {
-      "type": "Click",
-      "param": {
-        "target_offset": [
-          321,
-          103,
-          -388,
-          -134
-        ]
-      }
-    },
-    "post_delay": 400,
-    "timeout": 2500,
-    "$__mpe_code": {
-      "position": {
-        "x": 7320,
-        "y": 15820
-      }
-    },
-    "next": [
-      "七星燧发_弹窗数量",
-      "七星燧发_弹窗_点数不足"
+    ],
+    "on_error": [
+      "七星燧发_回顶1"
     ]
   },
   "七星燧发_补点商店": {
@@ -41738,10 +40916,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -41755,10 +40933,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -41826,10 +41004,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -41843,10 +41021,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
@@ -41914,10 +41092,10 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "qixing_card"
+          "qixing_gun"
         ],
-        "green_mask": true,
-        "threshold": 0.93,
+        "green_mask": false,
+        "threshold": 0.8,
         "order_by": "Score",
         "roi": [
           0,
@@ -41931,10 +41109,10 @@
       "type": "Click",
       "param": {
         "target_offset": [
-          321,
-          103,
-          -388,
-          -134
+          308,
+          87,
+          -85,
+          -85
         ]
       }
     },
