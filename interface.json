@@ -3,6 +3,7 @@
   "name": "MaaBh2",
   "description": "MaaBh2：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道、混服、腾讯服、B 服与测试服）",
   "version": "0.3.2",
+  "github": "https://github.com/freeze-12/MaaBH2",
   "license": "MIT",
   "controller": [
     {
