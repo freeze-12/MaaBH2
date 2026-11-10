@@ -17,7 +17,8 @@ runtimes/
 plugins/
 DependencySetup_*.bat
 
-# OCR 模型（MFA 官方自带）
+# OCR 模型不进 git（30 MB 二进制），但它是必需交付物：
+# 打包时由 _build/make_zips.py 从一键包同步进脚本包，别指望它「官方自带」
 resource/model/
 
 # 系统文件
