@@ -5,6 +5,8 @@
   "version": "0.3.3",
   "github": "https://github.com/freeze-12/MaaBH2",
   "license": "MIT",
+  "title": "崩坏学园2脚本",
+  "icon": "icon.png",
   "welcome": "announcements/welcome.md",
   "contact": "QQ 群：761339615\nGitHub：https://github.com/freeze-12/MaaBH2\n问题反馈：https://github.com/freeze-12/MaaBH2/issues",
   "controller": [
