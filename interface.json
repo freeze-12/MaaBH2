@@ -2,9 +2,11 @@
   "interface_version": 2,
   "name": "MaaBh2",
   "description": "MaaBh2：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道、混服、腾讯服、B 服与测试服）",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "github": "https://github.com/freeze-12/MaaBH2",
   "license": "MIT",
+  "welcome": "announcements/welcome.md",
+  "contact": "QQ 群：761339615\nGitHub：https://github.com/freeze-12/MaaBH2\n问题反馈：https://github.com/freeze-12/MaaBH2/issues",
   "controller": [
     {
       "name": "雷电模拟器",
@@ -20,10 +22,39 @@
       ]
     }
   ],
+  "group": [
+    {
+      "name": "startup",
+      "label": "启动准备",
+      "description": "启动游戏、进入区服、清理弹窗。",
+      "default_expand": true
+    },
+    {
+      "name": "daily",
+      "label": "日常收菜",
+      "description": "每天跑一遍：零时之种、共鸣屋、社团、探险、换装、多元裂缝、体力、小游戏、奖励。",
+      "default_expand": true
+    },
+    {
+      "name": "weekly",
+      "label": "周常活动",
+      "description": "崩坏塔、空想迷域、团战等每周内容。",
+      "default_expand": false
+    },
+    {
+      "name": "special",
+      "label": "特殊需求",
+      "description": "活动开荒与材料制作，按需单独运行。",
+      "default_expand": false
+    }
+  ],
   "task": [
     {
       "name": "0. 测试连接（不操作）",
-      "entry": "SmokeTest"
+      "entry": "SmokeTest",
+      "group": [
+        "startup"
+      ]
     },
     {
       "name": "1. 启动游戏",
@@ -31,7 +62,11 @@
       "description": "优先识别选项「启动渠道」选择的包，启动失败则进入轮询链依次尝试：国服 → 混服 → UC → 腾讯 → B服 → 测试服。",
       "option": [
         "启动渠道"
-      ]
+      ],
+      "group": [
+        "startup"
+      ],
+      "default_check": true
     },
     {
       "name": "2. 进入游戏（自选服务器）",
@@ -39,37 +74,72 @@
       "description": "可以选择的带下拉选项的区服请使用这个任务进入游戏，然后选「上次登录」。",
       "option": [
         "选择服务器"
+      ],
+      "group": [
+        "startup"
       ]
     },
     {
       "name": "11. 进入游戏（国服/腾讯服/测试服）",
       "entry": "国服进入游戏_开始",
-      "description": "不可选择、没有下拉框的区服请选择这个任务。"
+      "description": "不可选择、没有下拉框的区服请选择这个任务。",
+      "group": [
+        "startup"
+      ],
+      "default_check": true
     },
     {
       "name": "3. 清理弹窗",
       "entry": "清理弹窗_入口",
-      "description": "自动识别并关闭弹窗。除月卡奖励、角色生日弹窗（需手动关）外都能处理。"
+      "description": "自动识别并关闭弹窗。除月卡奖励、角色生日弹窗（需手动关）外都能处理。",
+      "group": [
+        "startup"
+      ],
+      "default_check": true
     },
     {
-      "name": "4. 社团领取",
-      "entry": "社团_开始"
-    },
-    {
-      "name": "5. 日常活动清体力",
-      "entry": "关卡选择链_开始",
-      "description": "请把备用装备切换按钮移动到右上角，固定八方的摇杆要开启。该任务不涉及战斗按键的使用，所以需要使用游戏内的自动套，或者亲密套（顾名思义刷亲密度的套装）。记得在前面插入任务16.装备选择 然后选好你对应的装备。",
-      "option": [
-        "战斗次数",
-        "战斗界面方位选择",
-        "使用双倍体力",
-        "战斗地图内时间",
-        "进图切换备用装备"
-      ]
+      "name": "8. 购买零时之种",
+      "entry": "购买_零时开始",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
       "name": "6. 共鸣屋每日刷新",
-      "entry": "共鸣屋_开始"
+      "entry": "共鸣屋_开始",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
+    },
+    {
+      "name": "4. 社团领取",
+      "entry": "社团_开始",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
+    },
+    {
+      "name": "9. 使魔探险",
+      "entry": "探险_开始",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
+    },
+    {
+      "name": "16. 装备选择",
+      "entry": "装备链_开始",
+      "description": "选择选项里的装备并退出。\n\n使用前请在装备编辑里将对应装备改成对应名字，否则无法识别。",
+      "option": [
+        "预设装备"
+      ],
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
       "name": "7. 多元裂缝",
@@ -84,37 +154,44 @@
         "螺旋回廊-等待秒数",
         "螺旋回廊-切装备",
         "螺旋回廊-回头"
-      ]
+      ],
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
-      "name": "8. 购买零时之种",
-      "entry": "购买_零时开始"
-    },
-    {
-      "name": "9. 使魔探险",
-      "entry": "探险_开始"
-    },
-    {
-      "name": "10. 每日每周任务奖励领取",
-      "entry": "每日_开始"
+      "name": "5. 日常活动清体力",
+      "entry": "关卡选择链_开始",
+      "description": "请把备用装备切换按钮移动到右上角，固定八方的摇杆要开启。该任务不涉及战斗按键的使用，所以需要使用游戏内的自动套，或者亲密套（顾名思义刷亲密度的套装）。记得在前面插入任务16.装备选择 然后选好你对应的装备。",
+      "option": [
+        "战斗次数",
+        "战斗界面方位选择",
+        "使用双倍体力",
+        "战斗地图内时间",
+        "进图切换备用装备"
+      ],
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
       "name": "12. 主线小游戏领取",
       "entry": "主线小游戏_开始",
-      "description": "主线小游戏蚊子腿奖励领取，会进入骑摩托小游戏的界面，该游戏概率产出水晶。"
+      "description": "主线小游戏蚊子腿奖励领取，会进入骑摩托小游戏的界面，该游戏概率产出水晶。",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
-      "name": "14. 体力活动开荒",
-      "entry": "体力活动开荒_开始",
-      "description": "体力活动开荒：有未完成的关卡自动找寻并完成，直到 BONUS 出现，判定为活动最后一页，把当前页面关卡打完自动退出。开启了「进图切换备用装备」的话，需要先在游戏设置内把备用切换按钮移动到右上角。",
-      "option": [
-        "使用双倍体力",
-        "开荒次数",
-        "翻页次数",
-        "战斗界面方位选择",
-        "战斗地图内时间",
-        "进图切换备用装备"
-      ]
+      "name": "10. 每日每周任务奖励领取",
+      "entry": "每日_开始",
+      "group": [
+        "daily"
+      ],
+      "default_check": true
     },
     {
       "name": "15. 周常崩坏塔",
@@ -126,14 +203,9 @@
         "载弹塔装备",
         "武器攻击力塔装备",
         "战斗等待上限"
-      ]
-    },
-    {
-      "name": "16. 装备选择",
-      "entry": "装备链_开始",
-      "description": "选择选项里的装备并退出。\n\n使用前请在装备编辑里将对应装备改成对应名字，否则无法识别。",
-      "option": [
-        "预设装备"
+      ],
+      "group": [
+        "weekly"
       ]
     },
     {
@@ -146,14 +218,9 @@
         "空想兑换",
         "空想兑换_买满",
         "空想兑换_个数"
-      ]
-    },
-    {
-      "name": "19. 制作七星线膛燧发枪",
-      "entry": "七星燧发_开始",
-      "description": "该任务运行有概率因为网络连接弹窗问题失败，如果你希望任务稳定运行可以在运行列表里多开几个，这个并不打算优化修改了。该任务主要是适用于合成觉醒霰弹枪给布里欧纳克（不认识自己搜）升级技能方便拆解拿地球仪（升级装备技能的材料）。使用前尽量在首页执行免得出bug。如果友情点不够会自动停止，请自行确保其他材料如羽毛或者狗粮的充裕。",
-      "option": [
-        "七星燧发_把数"
+      ],
+      "group": [
+        "weekly"
       ]
     },
     {
@@ -162,6 +229,36 @@
       "description": "【待测试 · 可能故障】本任务还没在真实团战里跑通，目前只是照着试炼场录屏把流程搭出来的试行版本，踩圈判定、结算点确定、回图重扫这些环节都还没有实机验证，出问题是正常的。先别把它挂进定时任务，也别当成稳定任务用。\n\n———— 以下为设计说明 ————\n\n打掉所有未占领的关卡，直到全部占领。\n\n带锁的是敌方关卡，会跳过。\n\n请在首页执行。\n\n战斗里的做法：一直按住攻击键和前进方向往前跑，跑满选项里的「跑动秒数」（默认 26）后停下，再往回一小步一小步走，每一步都看画面下方有没有「胜利」两个字。\n\n看到「胜利」就松手，画面里出现「确定」就点掉（结算界面有两次确定也会连点），然后回到地图自动扫下一关、点关卡、再开战，循环到没有可打的关卡为止。\n\n回地图或点关卡失败时会重试几次，不会立刻停下。\n\n关卡路程长、角色 26 秒还没跑到尽头就把「跑动秒数」调大；反过来如果角色很早就贴边、回头走了半天也踩不到圈，就调小。",
       "option": [
         "团战等待上限"
+      ],
+      "group": [
+        "weekly"
+      ]
+    },
+    {
+      "name": "14. 体力活动开荒",
+      "entry": "体力活动开荒_开始",
+      "description": "体力活动开荒：有未完成的关卡自动找寻并完成，直到 BONUS 出现，判定为活动最后一页，把当前页面关卡打完自动退出。开启了「进图切换备用装备」的话，需要先在游戏设置内把备用切换按钮移动到右上角。",
+      "option": [
+        "使用双倍体力",
+        "开荒次数",
+        "翻页次数",
+        "战斗界面方位选择",
+        "战斗地图内时间",
+        "进图切换备用装备"
+      ],
+      "group": [
+        "special"
+      ]
+    },
+    {
+      "name": "19. 制作七星线膛燧发枪",
+      "entry": "七星燧发_开始",
+      "description": "该任务运行有概率因为网络连接弹窗问题失败，如果你希望任务稳定运行可以在运行列表里多开几个，这个并不打算优化修改了。该任务主要是适用于合成觉醒霰弹枪给布里欧纳克（不认识自己搜）升级技能方便拆解拿地球仪（升级装备技能的材料）。使用前尽量在首页执行免得出bug。如果友情点不够会自动停止，请自行确保其他材料如羽毛或者狗粮的充裕。",
+      "option": [
+        "七星燧发_把数"
+      ],
+      "group": [
+        "special"
       ]
     }
   ],
@@ -3688,5 +3785,335 @@
         }
       }
     }
-  }
+  },
+  "preset": [
+    {
+      "name": "国服/腾讯服/测试服 日常",
+      "description": "启动 → 进游戏 → 清弹窗 → 零时之种 → 共鸣屋 → 社团 → 探险 → 换装 → 多元裂缝 → 清体力 → 主线小游戏 → 奖励。",
+      "task": [
+        {
+          "name": "0. 测试连接（不操作）",
+          "enabled": false
+        },
+        {
+          "name": "1. 启动游戏",
+          "enabled": true
+        },
+        {
+          "name": "2. 进入游戏（自选服务器）",
+          "enabled": false
+        },
+        {
+          "name": "11. 进入游戏（国服/腾讯服/测试服）",
+          "enabled": true
+        },
+        {
+          "name": "3. 清理弹窗",
+          "enabled": true
+        },
+        {
+          "name": "8. 购买零时之种",
+          "enabled": true
+        },
+        {
+          "name": "6. 共鸣屋每日刷新",
+          "enabled": true
+        },
+        {
+          "name": "4. 社团领取",
+          "enabled": true
+        },
+        {
+          "name": "9. 使魔探险",
+          "enabled": true
+        },
+        {
+          "name": "16. 装备选择",
+          "enabled": true
+        },
+        {
+          "name": "7. 多元裂缝",
+          "enabled": true
+        },
+        {
+          "name": "5. 日常活动清体力",
+          "enabled": true
+        },
+        {
+          "name": "12. 主线小游戏领取",
+          "enabled": true
+        },
+        {
+          "name": "10. 每日每周任务奖励领取",
+          "enabled": true
+        },
+        {
+          "name": "15. 周常崩坏塔",
+          "enabled": false
+        },
+        {
+          "name": "17. 周常空想迷域",
+          "enabled": false
+        },
+        {
+          "name": "20. 周常团战（待测试 · 未验证）",
+          "enabled": false
+        },
+        {
+          "name": "14. 体力活动开荒",
+          "enabled": false
+        },
+        {
+          "name": "19. 制作七星线膛燧发枪",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "name": "其他区服日常",
+      "description": "与「国服/腾讯服/测试服 日常」相同，只是改用 2 号任务自选服务器进入（UC / 混服 / B 服等）。",
+      "task": [
+        {
+          "name": "0. 测试连接（不操作）",
+          "enabled": false
+        },
+        {
+          "name": "1. 启动游戏",
+          "enabled": true
+        },
+        {
+          "name": "2. 进入游戏（自选服务器）",
+          "enabled": true
+        },
+        {
+          "name": "11. 进入游戏（国服/腾讯服/测试服）",
+          "enabled": false
+        },
+        {
+          "name": "3. 清理弹窗",
+          "enabled": true
+        },
+        {
+          "name": "8. 购买零时之种",
+          "enabled": true
+        },
+        {
+          "name": "6. 共鸣屋每日刷新",
+          "enabled": true
+        },
+        {
+          "name": "4. 社团领取",
+          "enabled": true
+        },
+        {
+          "name": "9. 使魔探险",
+          "enabled": true
+        },
+        {
+          "name": "16. 装备选择",
+          "enabled": true
+        },
+        {
+          "name": "7. 多元裂缝",
+          "enabled": true
+        },
+        {
+          "name": "5. 日常活动清体力",
+          "enabled": true
+        },
+        {
+          "name": "12. 主线小游戏领取",
+          "enabled": true
+        },
+        {
+          "name": "10. 每日每周任务奖励领取",
+          "enabled": true
+        },
+        {
+          "name": "15. 周常崩坏塔",
+          "enabled": false
+        },
+        {
+          "name": "17. 周常空想迷域",
+          "enabled": false
+        },
+        {
+          "name": "20. 周常团战（待测试 · 未验证）",
+          "enabled": false
+        },
+        {
+          "name": "14. 体力活动开荒",
+          "enabled": false
+        },
+        {
+          "name": "19. 制作七星线膛燧发枪",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "name": "周常",
+      "description": "只跑崩坏塔与空想迷域，需要游戏已停在首页。",
+      "task": [
+        {
+          "name": "0. 测试连接（不操作）",
+          "enabled": false
+        },
+        {
+          "name": "1. 启动游戏",
+          "enabled": false
+        },
+        {
+          "name": "2. 进入游戏（自选服务器）",
+          "enabled": false
+        },
+        {
+          "name": "11. 进入游戏（国服/腾讯服/测试服）",
+          "enabled": false
+        },
+        {
+          "name": "3. 清理弹窗",
+          "enabled": false
+        },
+        {
+          "name": "8. 购买零时之种",
+          "enabled": false
+        },
+        {
+          "name": "6. 共鸣屋每日刷新",
+          "enabled": false
+        },
+        {
+          "name": "4. 社团领取",
+          "enabled": false
+        },
+        {
+          "name": "9. 使魔探险",
+          "enabled": false
+        },
+        {
+          "name": "16. 装备选择",
+          "enabled": false
+        },
+        {
+          "name": "7. 多元裂缝",
+          "enabled": false
+        },
+        {
+          "name": "5. 日常活动清体力",
+          "enabled": false
+        },
+        {
+          "name": "12. 主线小游戏领取",
+          "enabled": false
+        },
+        {
+          "name": "10. 每日每周任务奖励领取",
+          "enabled": false
+        },
+        {
+          "name": "15. 周常崩坏塔",
+          "enabled": true
+        },
+        {
+          "name": "17. 周常空想迷域",
+          "enabled": true
+        },
+        {
+          "name": "20. 周常团战（待测试 · 未验证）",
+          "enabled": false
+        },
+        {
+          "name": "14. 体力活动开荒",
+          "enabled": false
+        },
+        {
+          "name": "19. 制作七星线膛燧发枪",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "name": "日常+周常全套",
+      "description": "日常 + 周常一次跑完（国服 / 腾讯服 / 测试服版）。其他区服请改用「其他区服日常」再补勾 15、17。",
+      "task": [
+        {
+          "name": "0. 测试连接（不操作）",
+          "enabled": false
+        },
+        {
+          "name": "1. 启动游戏",
+          "enabled": true
+        },
+        {
+          "name": "2. 进入游戏（自选服务器）",
+          "enabled": false
+        },
+        {
+          "name": "11. 进入游戏（国服/腾讯服/测试服）",
+          "enabled": true
+        },
+        {
+          "name": "3. 清理弹窗",
+          "enabled": true
+        },
+        {
+          "name": "8. 购买零时之种",
+          "enabled": true
+        },
+        {
+          "name": "6. 共鸣屋每日刷新",
+          "enabled": true
+        },
+        {
+          "name": "4. 社团领取",
+          "enabled": true
+        },
+        {
+          "name": "9. 使魔探险",
+          "enabled": true
+        },
+        {
+          "name": "16. 装备选择",
+          "enabled": true
+        },
+        {
+          "name": "7. 多元裂缝",
+          "enabled": true
+        },
+        {
+          "name": "5. 日常活动清体力",
+          "enabled": true
+        },
+        {
+          "name": "12. 主线小游戏领取",
+          "enabled": true
+        },
+        {
+          "name": "10. 每日每周任务奖励领取",
+          "enabled": true
+        },
+        {
+          "name": "15. 周常崩坏塔",
+          "enabled": true
+        },
+        {
+          "name": "17. 周常空想迷域",
+          "enabled": true
+        },
+        {
+          "name": "20. 周常团战（待测试 · 未验证）",
+          "enabled": false
+        },
+        {
+          "name": "14. 体力活动开荒",
+          "enabled": false
+        },
+        {
+          "name": "19. 制作七星线膛燧发枪",
+          "enabled": false
+        }
+      ]
+    }
+  ]
 }
