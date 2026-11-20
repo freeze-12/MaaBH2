@@ -2,10 +2,10 @@
   "interface_version": 2,
   "name": "MaaBh2",
   "description": "MaaBh2：崩坏学园2（国服 / com.miHoYo.HSoDv2Original，支持 UC 渠道、混服、腾讯服、B 服与测试服）",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "github": "https://github.com/freeze-12/MaaBH2",
   "license": "MIT",
-  "title": "MaaBH2 v0.3.4",
+  "title": "MaaBH2 v0.3.5",
   "icon": "icon.png",
   "welcome": "announcements/welcome.md",
   "contact": "QQ 群：761339615\nGitHub：https://github.com/freeze-12/MaaBH2\n问题反馈：https://github.com/freeze-12/MaaBH2/issues",
@@ -146,7 +146,7 @@
     {
       "name": "16. 装备选择",
       "entry": "装备链_开始",
-      "description": "选择选项里的装备并退出。\n\n使用前请在装备编辑里将对应装备改成对应名字，否则无法识别。\n\n== 点击校验 ==\n点完列表里的套装后，会看顶部标题栏是否变成了目标套装名（这一栏显示的就是当前选中的那套）：\n  · 对上了 → 继续点「选择方案」\n  · 没对上 → 判定这次点歪了，回列表重新找、再点一次，最多重试 3 次\n重试 3 次还不对，就按已选中处理继续往下走，不会卡住。\n\n同时把点击落点从「识别框上移 12 像素」改回「识别框正中」——\n行与行之间有 12 像素空隙，原设置会把点击点推进缝里，点了没有任何反应。\n",
+      "description": "选择选项里的装备并退出。\n\n使用前请在装备编辑里将对应装备改成对应名字，否则无法识别。",
       "option": [
         "预设装备"
       ],
