@@ -47,13 +47,35 @@
   "领取": {
     "max_hit": 5,
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "And",
       "param": {
-        "template": [
-          "btn_lingqu.png"
+        "all_of": [
+          {
+            "sub_name": "btn",
+            "recognition": "TemplateMatch",
+            "template": [
+              "btn_lingqu.png"
+            ],
+            "threshold": 0.8,
+            "order_by": "Score"
+          },
+          {
+            "sub_name": "txt",
+            "recognition": "OCR",
+            "expected": [
+              "领取"
+            ],
+            "roi": "btn",
+            "roi_offset": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "order_by": "Expected"
+          }
         ],
-        "threshold": 0.8,
-        "order_by": "Score"
+        "box_index": 0
       }
     },
     "action": {
@@ -593,10 +615,10 @@
         ]
       }
     },
-    "repeat": 2,
-    "repeat_delay": 300,
+    "repeat": 4,
+    "repeat_delay": 500,
     "post_delay": 5000,
-    "timeout": 5000,
+    "timeout": 8000,
     "next": [
       "进入游戏_处理登录框"
     ],
@@ -681,11 +703,11 @@
         ]
       }
     },
-    "repeat": 3,
-    "repeat_delay": 300,
+    "repeat": 4,
+    "repeat_delay": 500,
     "pre_delay": 3000,
     "post_delay": 2000,
-    "timeout": -1,
+    "timeout": 8000,
     "next": [
       "进入游戏_完成"
     ],
@@ -717,7 +739,7 @@
     }
   },
   "清弹窗": {
-    "timeout": 10000,
+    "timeout": 15000,
     "next": [
       "关掉x",
       "领取",
@@ -1154,18 +1176,39 @@
   },
   "关卡选择链_点战斗": {
     "recognition": {
-      "type": "OCR",
+      "type": "Or",
       "param": {
-        "roi": [
-          705,
-          0,
-          160,
-          125
-        ],
-        "expected": [
-          "^战斗$"
-        ],
-        "order_by": "Expected"
+        "any_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "zhandou",
+              "zhandou_gray"
+            ],
+            "threshold": 0.8,
+            "order_by": "Score",
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^战斗$"
+            ],
+            "order_by": "Expected",
+            "roi": [
+              705,
+              0,
+              160,
+              125
+            ]
+          }
+        ]
       }
     },
     "action": {
@@ -1179,7 +1222,7 @@
         ]
       }
     },
-    "timeout": 1500,
+    "timeout": 2600,
     "next": [
       "关卡选择链_判断bonus"
     ],
@@ -1196,18 +1239,39 @@
   },
   "关卡选择链_补体力后点战斗": {
     "recognition": {
-      "type": "OCR",
+      "type": "Or",
       "param": {
-        "roi": [
-          705,
-          0,
-          160,
-          125
-        ],
-        "expected": [
-          "^战斗$"
-        ],
-        "order_by": "Expected"
+        "any_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "zhandou",
+              "zhandou_gray"
+            ],
+            "threshold": 0.8,
+            "order_by": "Score",
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^战斗$"
+            ],
+            "order_by": "Expected",
+            "roi": [
+              705,
+              0,
+              160,
+              125
+            ]
+          }
+        ]
       }
     },
     "action": {
@@ -1221,7 +1285,7 @@
         ]
       }
     },
-    "timeout": 1500,
+    "timeout": 2400,
     "next": [
       "关卡选择链_补体力后判断bonus"
     ],
@@ -3293,7 +3357,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -3856,10 +3926,12 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "zhandou"
+          "zhandou",
+          "zhandou_gray"
         ],
         "threshold": 0.8,
-        "order_by": "Score"
+        "order_by": "Score",
+        "green_mask": true
       }
     },
     "action": {
@@ -4301,10 +4373,12 @@
       "type": "TemplateMatch",
       "param": {
         "template": [
-          "zhandou"
+          "zhandou",
+          "zhandou_gray"
         ],
         "threshold": 0.8,
-        "order_by": "Score"
+        "order_by": "Score",
+        "green_mask": true
       }
     },
     "action": {
@@ -4956,7 +5030,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -5465,28 +5545,18 @@
   },
   "购买_零时点商店": {
     "recognition": {
-      "type": "And",
+      "type": "OCR",
       "param": {
-        "all_of": [
-          {
-            "recognition": "TemplateMatch",
-            "template": [
-              "shangdian"
-            ],
-            "threshold": 0.7,
-            "order_by": "Score",
-            "sub_name": "dlg"
-          },
-          {
-            "recognition": "OCR",
-            "expected": [
-              "^商店$"
-            ],
-            "order_by": "Expected",
-            "roi": "dlg"
-          }
+        "expected": [
+          "^商店$"
         ],
-        "box_index": 0
+        "roi": [
+          950,
+          10,
+          100,
+          100
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -5498,28 +5568,50 @@
       "购买_零时检测商店主界面"
     ],
     "on_error": [
-      "购买_零时检测商店主界面"
+      "购买_零时再点商店"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "右上角按钮条里 OCR「商店」二字（固定 ROI），识别框中心即文字中心，直接点"
   },
   "购买_零时检测商店主界面": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "template": [
-          "shangdianzhujiemian"
-        ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^水晶商店$"
+            ],
+            "roi": [
+              200,
+              270,
+              145,
+              40
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^礼包商店$"
+            ],
+            "roi": [
+              455,
+              270,
+              130,
+              40
+            ]
+          }
+        ]
       }
     },
     "post_delay": 1000,
-    "timeout": 10000,
+    "timeout": 5000,
     "focus": {
       "Node.PipelineNode.Succeeded": "成功识别商店主界面"
     },
@@ -5534,32 +5626,23 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "商店卡片页才会出现「水晶商店 / 礼包商店」横幅文字；任一认到即已进入商店"
   },
   "购买_零时再点商店": {
     "recognition": {
-      "type": "And",
+      "type": "OCR",
       "param": {
-        "all_of": [
-          {
-            "recognition": "TemplateMatch",
-            "template": [
-              "shangdian"
-            ],
-            "threshold": 0.7,
-            "order_by": "Score",
-            "sub_name": "dlg"
-          },
-          {
-            "recognition": "OCR",
-            "expected": [
-              "^商店$"
-            ],
-            "order_by": "Expected",
-            "roi": "dlg"
-          }
+        "expected": [
+          "^商店$"
         ],
-        "box_index": 0
+        "roi": [
+          950,
+          10,
+          100,
+          100
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -5575,24 +5658,46 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "右上角按钮条里 OCR「商店」二字（固定 ROI），识别框中心即文字中心，直接点"
   },
   "购买_零时检测商店主界面2": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "template": [
-          "shangdianzhujiemian"
-        ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^水晶商店$"
+            ],
+            "roi": [
+              200,
+              270,
+              145,
+              40
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^礼包商店$"
+            ],
+            "roi": [
+              455,
+              270,
+              130,
+              40
+            ]
+          }
+        ]
       }
     },
     "action": {
-      "type": "Click"
+      "type": "DoNothing"
     },
     "post_delay": 1500,
-    "timeout": 10000,
+    "timeout": 5000,
     "focus": {
       "Node.PipelineNode.Succeeded": "成功识别商店主界面",
       "Node.PipelineNode.Failed": "未识别商店主界面"
@@ -5608,17 +5713,23 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "商店卡片页才会出现「水晶商店 / 礼包商店」横幅文字；任一认到即已进入商店"
   },
   "购买_零时点礼包商店": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "OCR",
       "param": {
-        "template": [
-          "libaoshangdian"
+        "expected": [
+          "^礼包商店$"
         ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "roi": [
+          455,
+          270,
+          130,
+          40
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -5637,17 +5748,23 @@
     },
     "on_error": [
       "购买_零时点礼包商店_重试"
-    ]
+    ],
+    "desc": "OCR 商店卡片页的「礼包商店」横幅，点文字中心进店"
   },
   "购买_零时点后魅礼包": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "OCR",
       "param": {
-        "template": [
-          "houmeilibao"
+        "expected": [
+          "^吼美礼包$"
         ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "roi": [
+          20,
+          280,
+          115,
+          38
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -5663,7 +5780,8 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "OCR 礼包商店左侧分类标签「吼美礼包」，点文字中心切换分类"
   },
   "购买_零时找馈礼": {
     "recognition": {
@@ -5920,28 +6038,18 @@
   },
   "购买_零时退出点商店": {
     "recognition": {
-      "type": "And",
+      "type": "OCR",
       "param": {
-        "all_of": [
-          {
-            "recognition": "TemplateMatch",
-            "template": [
-              "shangdian"
-            ],
-            "threshold": 0.7,
-            "order_by": "Score",
-            "sub_name": "dlg"
-          },
-          {
-            "recognition": "OCR",
-            "expected": [
-              "^商店$"
-            ],
-            "order_by": "Expected",
-            "roi": "dlg"
-          }
+        "expected": [
+          "^商店$"
         ],
-        "box_index": 0
+        "roi": [
+          950,
+          10,
+          100,
+          100
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -5956,24 +6064,46 @@
       "购买_零时退出检测商店"
     ],
     "on_error": [
-      "购买_零时退出检测商店"
+      "结束"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "右上角按钮条里 OCR「商店」二字（固定 ROI），识别框中心即文字中心，直接点"
   },
   "购买_零时退出检测商店": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "template": [
-          "shangdianzhujiemian"
-        ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^水晶商店$"
+            ],
+            "roi": [
+              200,
+              270,
+              145,
+              40
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^礼包商店$"
+            ],
+            "roi": [
+              455,
+              270,
+              130,
+              40
+            ]
+          }
+        ]
       }
     },
     "post_delay": 1000,
@@ -5992,7 +6122,8 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "商店卡片页才会出现「水晶商店 / 礼包商店」横幅文字；任一认到即已进入商店"
   },
   "购买_零时退出点首页": {
     "recognition": {
@@ -6028,28 +6159,18 @@
   },
   "购买_零时成功点商店": {
     "recognition": {
-      "type": "And",
+      "type": "OCR",
       "param": {
-        "all_of": [
-          {
-            "recognition": "TemplateMatch",
-            "template": [
-              "shangdian"
-            ],
-            "threshold": 0.7,
-            "order_by": "Score",
-            "sub_name": "dlg"
-          },
-          {
-            "recognition": "OCR",
-            "expected": [
-              "^商店$"
-            ],
-            "order_by": "Expected",
-            "roi": "dlg"
-          }
+        "expected": [
+          "^商店$"
         ],
-        "box_index": 0
+        "roi": [
+          950,
+          10,
+          100,
+          100
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -6064,24 +6185,46 @@
       "购买_零时成功检测商店"
     ],
     "on_error": [
-      "购买_零时成功检测商店"
+      "结束"
     ],
     "$__mpe_code": {
       "position": {
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "右上角按钮条里 OCR「商店」二字（固定 ROI），识别框中心即文字中心，直接点"
   },
   "购买_零时成功检测商店": {
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "Or",
       "param": {
-        "template": [
-          "shangdianzhujiemian"
-        ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "any_of": [
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^水晶商店$"
+            ],
+            "roi": [
+              200,
+              270,
+              145,
+              40
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^礼包商店$"
+            ],
+            "roi": [
+              455,
+              270,
+              130,
+              40
+            ]
+          }
+        ]
       }
     },
     "post_delay": 1000,
@@ -6100,7 +6243,8 @@
         "x": 0,
         "y": 0
       }
-    }
+    },
+    "desc": "商店卡片页才会出现「水晶商店 / 礼包商店」横幅文字；任一认到即已进入商店"
   },
   "购买_零时成功点首页": {
     "recognition": {
@@ -7044,10 +7188,18 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.8,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -7524,10 +7676,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -7573,10 +7727,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8335,10 +8491,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8427,10 +8585,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8476,10 +8636,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8525,10 +8687,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8574,10 +8738,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -8623,10 +8789,12 @@
           {
             "recognition": "TemplateMatch",
             "template": [
-              "zhandou"
+              "zhandou",
+              "zhandou_gray"
             ],
             "threshold": 0.75,
-            "order_by": "Score"
+            "order_by": "Score",
+            "green_mask": true
           },
           {
             "recognition": "OCR",
@@ -9347,18 +9515,39 @@
   },
   "开荒_点战斗": {
     "recognition": {
-      "type": "OCR",
+      "type": "Or",
       "param": {
-        "roi": [
-          705,
-          0,
-          160,
-          125
-        ],
-        "expected": [
-          "^战斗$"
-        ],
-        "order_by": "Expected"
+        "any_of": [
+          {
+            "recognition": "TemplateMatch",
+            "template": [
+              "zhandou",
+              "zhandou_gray"
+            ],
+            "threshold": 0.8,
+            "order_by": "Score",
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
+          },
+          {
+            "recognition": "OCR",
+            "expected": [
+              "^战斗$"
+            ],
+            "order_by": "Expected",
+            "roi": [
+              705,
+              0,
+              160,
+              125
+            ]
+          }
+        ]
       }
     },
     "action": {
@@ -15293,7 +15482,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -33392,7 +33587,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -38201,9 +38402,6 @@
       "迷域_清面板",
       "迷域_走不动了"
     ],
-    "focus": {
-      "Node.PipelineNode.Succeeded": "🔍 空想迷域：看身边有没有能走的格子"
-    },
     "on_error": [
       "迷域_走不动了",
       "迷域_退本局",
@@ -38316,10 +38514,7 @@
     ],
     "on_error": [
       "迷域_事件判"
-    ],
-    "focus": {
-      "Node.PipelineNode.Succeeded": "🚶 空想迷域：点最近的亮格"
-    }
+    ]
   },
   "迷域_退确认": {
     "recognition": {
@@ -38472,10 +38667,7 @@
     ],
     "on_error": [
       "迷域_事件判"
-    ],
-    "focus": {
-      "Node.PipelineNode.Succeeded": "⏳ 空想迷域：点行动力/战斗/问号格"
-    }
+    ]
   },
   "迷域_格_B": {
     "recognition": {
@@ -38557,10 +38749,7 @@
     ],
     "on_error": [
       "迷域_事件判"
-    ],
-    "focus": {
-      "Node.PipelineNode.Succeeded": "🎁 空想迷域：点宝箱/代币/经验格"
-    }
+    ]
   },
   "七星燧发_开始": {
     "recognition": {
@@ -48219,7 +48408,6 @@
       "迷域_等画面"
     ],
     "focus": {
-      "Node.PipelineNode.Succeeded": "🗺 空想迷域：确认是地图，没有弹窗挡着，可以点格子",
       "Node.PipelineNode.Failed": "⏳ 空想迷域：既不是弹窗也不是地图，等一等再看"
     }
   },
@@ -48240,10 +48428,7 @@
     ],
     "on_error": [
       "迷域_找格"
-    ],
-    "focus": {
-      "Node.PipelineNode.Succeeded": "⏳ 空想迷域：过场/加载中，等 0.8 秒再判一次"
-    }
+    ]
   },
   "迷域_事件兜底": {
     "recognition": {
@@ -48306,8 +48491,7 @@
       "迷域_找格"
     ],
     "focus": {
-      "Node.PipelineNode.Succeeded": "🪟 空想迷域：屏幕上有弹窗，先点「取消」关掉（不点格子）",
-      "Node.PipelineNode.Failed": "↩️ 空想迷域：没有弹窗，可以点格子"
+      "Node.PipelineNode.Succeeded": "🪟 空想迷域：屏幕上有弹窗，先点「取消」关掉（不点格子）"
     }
   },
   "迷域_拖23": {
@@ -50103,13 +50287,18 @@
     "max_hit": 1,
     "timeout": 5000,
     "recognition": {
-      "type": "TemplateMatch",
+      "type": "OCR",
       "param": {
-        "template": [
-          "libaoshangdian"
+        "expected": [
+          "^礼包商店$"
         ],
-        "threshold": 0.7,
-        "order_by": "Score"
+        "roi": [
+          455,
+          270,
+          130,
+          40
+        ],
+        "order_by": "Expected"
       }
     },
     "action": {
@@ -50124,7 +50313,8 @@
         "x": 0,
         "y": 130
       }
-    }
+    },
+    "desc": "OCR 商店卡片页的「礼包商店」横幅，点文字中心进店"
   },
   "购买_零时找馈礼_重试": {
     "max_hit": 1,
@@ -50652,7 +50842,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -79339,7 +79535,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
@@ -79397,7 +79599,13 @@
             ],
             "threshold": 0.8,
             "order_by": "Score",
-            "green_mask": true
+            "green_mask": true,
+            "roi": [
+              640,
+              0,
+              260,
+              150
+            ]
           },
           {
             "recognition": "OCR",
